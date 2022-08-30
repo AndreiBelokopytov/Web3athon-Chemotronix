@@ -4,8 +4,8 @@ import LetterCircle from "./LetterCircle";
 function TeamSection() {
   return (
     <div className="min-h-[50vh] pt-10">
-      <div className="flex items-center justify-center my-auto">
-        <div className="flex items-center w-[80%] mx-auto justify-between mt-auto">
+      <div className="flex items-center  justify-center my-auto">
+        <div className="flex items-center flex-wrap w-[80%] mx-auto justify-between mt-auto">
           <div className=" max-w-lg">
             <h2 className="text-6xl font-bold">Our Team</h2>
             <p className="text-[25px]">

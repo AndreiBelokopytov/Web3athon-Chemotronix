@@ -6,7 +6,7 @@ import Quote from "../images/quote.png";
 function QuoteSection() {
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="flex items-center mx-auto w-[80%]">
+      <div className="flex items-center flex-wrap mx-auto w-[80%]">
         <motion.div
           initial={{ opacity: 0, y: -40, x: -40 }}
           whileInView={{ opacity: 1, y: 0, x: 0 }}
