@@ -15,10 +15,10 @@ function Navbar() {
         />
         <div className="hidden">
           <ul
-            tabindex="0"
+            tabIndex="0"
             className="menu flex flex-col lg:hidden  mx-auto w-[50%] z-40 bg-white "
           >
-            <li tabindex="0">
+            <li tabIndex="0">
               <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
                 What we do
                 <svg
@@ -42,7 +42,7 @@ function Navbar() {
                 </li>
               </ul>
             </li>
-            <li tabindex="0">
+            <li tabIndex="0">
               <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
                 Industries
                 <svg
@@ -66,7 +66,7 @@ function Navbar() {
                 </li>
               </ul>
             </li>
-            <li tabindex="0">
+            <li tabIndex="0">
               <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
                 Build
                 <svg
@@ -96,7 +96,7 @@ function Navbar() {
               </a>
             </li>
           </ul>
-          <label tabindex="0" className="btn btn-ghost lg:hidden z-40">
+          <label tabIndex="0" className="btn btn-ghost lg:hidden z-40">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -105,16 +105,16 @@ function Navbar() {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M4 6h16M4 12h8m-8 6h16"
               />
             </svg>
           </label>
         </div>
         <ul className=" menu lg:menu-horizontal hidden ">
-          <li tabindex="0">
+          <li tabIndex="0">
             <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
               What we do
               <svg
@@ -138,7 +138,7 @@ function Navbar() {
               </li>
             </ul>
           </li>
-          <li tabindex="0">
+          <li tabIndex="0">
             <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
               Industries
               <svg
@@ -162,7 +162,7 @@ function Navbar() {
               </li>
             </ul>
           </li>
-          <li tabindex="0">
+          <li tabIndex="0">
             <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
               Build
               <svg
