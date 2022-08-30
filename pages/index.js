@@ -27,38 +27,38 @@ export default function Home() {
         <ThirdSection />
         <TeamSection />
         <ContactSection />
-        <footer class="footer mx-auto px-16 py-28">
+        <footer className="footer mx-auto px-16 py-28">
           <div>
-            <h1 class=" text-4xl text-black font-bold">WHAT WE DO</h1>
-            <a class="link link-hover">Technology</a>
-            <a class="link link-hover">Our solutions</a>
-            <a class="link link-hover">Projects Map</a>
-            <a class="link link-hover">Case Studies</a>
+            <h1 className=" text-4xl text-black font-bold">WHAT WE DO</h1>
+            <a className="link link-hover">Technology</a>
+            <a className="link link-hover">Our solutions</a>
+            <a className="link link-hover">Projects Map</a>
+            <a className="link link-hover">Case Studies</a>
           </div>
           <div>
-            <h1 class=" text-4xl text-black font-bold">INDUSTRIES</h1>
-            <a class="link link-hover">About us</a>
-            <a class="link link-hover">Contact</a>
-            <a class="link link-hover">Jobs</a>
-            <a class="link link-hover">Press kit</a>
+            <h1 className=" text-4xl text-black font-bold">INDUSTRIES</h1>
+            <a className="link link-hover">About us</a>
+            <a className="link link-hover">Contact</a>
+            <a className="link link-hover">Jobs</a>
+            <a className="link link-hover">Press kit</a>
           </div>
           <div>
-            <h1 class=" text-4xl text-black font-bold">BUILD</h1>
-            <a class="link link-hover">Terms of use</a>
-            <a class="link link-hover">Privacy policy</a>
-            <a class="link link-hover">Cookie policy</a>
+            <h1 className=" text-4xl text-black font-bold">BUILD</h1>
+            <a className="link link-hover">Terms of use</a>
+            <a className="link link-hover">Privacy policy</a>
+            <a className="link link-hover">Cookie policy</a>
           </div>
           <div>
-            <h1 class=" text-4xl text-black font-bold">LEARN</h1>
-            <a class="link link-hover">Terms of use</a>
-            <a class="link link-hover">Privacy policy</a>
-            <a class="link link-hover">Cookie policy</a>
+            <h1 className=" text-4xl text-black font-bold">LEARN</h1>
+            <a className="link link-hover">Terms of use</a>
+            <a className="link link-hover">Privacy policy</a>
+            <a className="link link-hover">Cookie policy</a>
           </div>
           <div>
-            <h1 class=" text-4xl text-black font-bold">ABOUT</h1>
-            <a class="link link-hover">Terms of use</a>
-            <a class="link link-hover">Privacy policy</a>
-            <a class="link link-hover">Cookie policy</a>
+            <h1 className=" text-4xl text-black font-bold">ABOUT</h1>
+            <a className="link link-hover">Terms of use</a>
+            <a className="link link-hover">Privacy policy</a>
+            <a className="link link-hover">Cookie policy</a>
           </div>
         </footer>
         <footer className="bg-[#E9F4FB] flex items-center justify-center py-6">

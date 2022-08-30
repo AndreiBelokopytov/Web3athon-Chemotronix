@@ -13,16 +13,16 @@ function Navbar() {
           style={{ zIndex: 40 }}
           onClick={() => router.push("/")}
         />
-        <div class="hidden">
+        <div className="hidden">
           <ul
             tabindex="0"
-            class="menu flex flex-col lg:hidden  mx-auto w-[50%] z-40 bg-white "
+            className="menu flex flex-col lg:hidden  mx-auto w-[50%] z-40 bg-white "
           >
             <li tabindex="0">
-              <a class="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
+              <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
                 What we do
                 <svg
-                  class="fill-current"
+                  className="fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -33,7 +33,7 @@ function Navbar() {
                   <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
                 </svg>
               </a>
-              <ul class="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40">
+              <ul className="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40">
                 <li>
                   <a>About us</a>
                 </li>
@@ -43,10 +43,10 @@ function Navbar() {
               </ul>
             </li>
             <li tabindex="0">
-              <a class="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
+              <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
                 Industries
                 <svg
-                  class="fill-current"
+                  className="fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -57,7 +57,7 @@ function Navbar() {
                   <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
                 </svg>
               </a>
-              <ul class="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40">
+              <ul className="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40">
                 <li>
                   <a>About us</a>
                 </li>
@@ -67,10 +67,10 @@ function Navbar() {
               </ul>
             </li>
             <li tabindex="0">
-              <a class="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
+              <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
                 Build
                 <svg
-                  class="fill-current"
+                  className="fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -81,7 +81,7 @@ function Navbar() {
                   <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
                 </svg>
               </a>
-              <ul class="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40 ">
+              <ul className="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40 ">
                 <li>
                   <a>About us</a>
                 </li>
@@ -96,10 +96,10 @@ function Navbar() {
               </a>
             </li>
           </ul>
-          <label tabindex="0" class="btn btn-ghost lg:hidden z-40">
+          <label tabindex="0" className="btn btn-ghost lg:hidden z-40">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
+              className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -115,10 +115,10 @@ function Navbar() {
         </div>
         <ul className=" menu lg:menu-horizontal hidden ">
           <li tabindex="0">
-            <a class="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
+            <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
               What we do
               <svg
-                class="fill-current"
+                className="fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -129,7 +129,7 @@ function Navbar() {
                 <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
               </svg>
             </a>
-            <ul class="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40">
+            <ul className="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40">
               <li>
                 <a>About us</a>
               </li>
@@ -139,10 +139,10 @@ function Navbar() {
             </ul>
           </li>
           <li tabindex="0">
-            <a class="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
+            <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
               Industries
               <svg
-                class="fill-current"
+                className="fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -153,7 +153,7 @@ function Navbar() {
                 <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
               </svg>
             </a>
-            <ul class="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40">
+            <ul className="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40">
               <li>
                 <a>About us</a>
               </li>
@@ -163,10 +163,10 @@ function Navbar() {
             </ul>
           </li>
           <li tabindex="0">
-            <a class="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
+            <a className="justify-between font-[400] text-[#01431D] text-lg active:bg-primary">
               Build
               <svg
-                class="fill-current"
+                className="fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -177,7 +177,7 @@ function Navbar() {
                 <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
               </svg>
             </a>
-            <ul class="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40 ">
+            <ul className="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40 ">
               <li>
                 <a>About us</a>
               </li>
