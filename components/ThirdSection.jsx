@@ -13,7 +13,7 @@ function ThirdSection() {
       <div className="md:opacity-100 opacity-0">
         <Image src={Rectangle} style={{ zIndex: -10 }} />
       </div>
-      <div className="">
+      <div className="md:hidden">
         <Image src={Rectangle} style={{ zIndex: -10 }} />
       </div>
       <div className="flex flex-wrap items-center justify-between w-[80%] mx-auto">
