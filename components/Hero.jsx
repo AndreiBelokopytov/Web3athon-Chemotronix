@@ -8,7 +8,7 @@ import HeroCard from "./HeroCard";
 import { motion } from "framer-motion";
 function Hero() {
   return (
-    <div className="relative">
+    <div className="relative md:mt-0 mt-10">
       <div className="absolute md:-bottom-3 md:top-auto top-40 destop-hero-grad  left-0 right-0   ">
         {" "}
         <Image src={HeroGradient} />

@@ -2,7 +2,7 @@ import React from "react";
 
 function ContactSection() {
   return (
-    <div className="bg-[#DCFFEB] min-h-[50vh] flex items-center justify-center pt-10 pb-10">
+    <div className="bg-[#DCFFEB] min-h-[50vh] flex items-center justify-center pt-20 pb-20">
       <div className="flex items-center flex-wrap mx-auto md:w-[50%] w-[86%] justify-between">
         <div>
           <p>Looking to partner with us?</p>

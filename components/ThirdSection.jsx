@@ -9,10 +9,15 @@ import cleanEnergy from "../images/clean-energy.png";
 import iot from "../images/iot.png";
 function ThirdSection() {
   return (
-    <div className="third-section min-h-screen fmx-auto">
-      <Image src={Rectangle} style={{ zIndex: -10, marginBottom: "-78px" }} />
+    <div className="third-section min-h-screen mx-auto">
+      <div className="md:opacity-100 opacity-0">
+        <Image src={Rectangle} style={{ zIndex: -10 }} />
+      </div>
+      <div className="">
+        <Image src={Rectangle} style={{ zIndex: -10 }} />
+      </div>
       <div className="flex flex-wrap items-center justify-between w-[80%] mx-auto">
-        <div className="max-w-md lg:mb-0 mb-8">
+        <div className="max-w-md lg:mb-0 mb-28">
           <h2 className="font-bold text-6xl max-w-xs uppercase">
             Who are <span className="text-primary">we?</span>
           </h2>
@@ -23,18 +28,18 @@ function ThirdSection() {
           </p>
           <button className="btn-primary">Contact Us</button>
         </div>
-        <div className="bg-white rounded-xl px-8 py-20 shadow">
+        <div className="bg-[#FFFED4] rounded-xl px-8 py-20 shadow">
           <h2 className="font-bold text-6xl max-w-xs uppercase">
             Our <span className="text-accent">Mission</span>
           </h2>
-          <p className="max-w-md text-[25px] mt-4">
+          <p className="max-w-md text-[25px] mt-4 bg-[#FFFED5]">
             Ensuring data access to provide an easier framework for achieving
             our planet goals
           </p>
         </div>
       </div>
       <div className="flex flex-wrap  items-center justify-between w-[80%] mx-auto mt-16">
-        <div className="card-gradient rounded-xl  pt-20 shadow lg:mb-0 mb-8">
+        <div className="card-gradient rounded-xl  pt-20 shadow lg:mb-0 mb-20">
           <div className="px-8 pb-5">
             <h2 className="font-bold text-6xl max-w-xs uppercase ">
               Our <span className="text-[#0FE76A]">Vision</span>
@@ -48,7 +53,7 @@ function ThirdSection() {
             </p>
           </div>
         </div>
-        <div className="max-w-md">
+        <div className="max-w-md lg:mb-0 mb-20">
           <h2 className="font-bold text-6xl max-w-xs uppercase">
             Our <span className="text-primary">solution</span>
           </h2>

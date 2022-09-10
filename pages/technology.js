@@ -3,6 +3,8 @@ import Image from "next/image";
 import ColoredCard from "../components/ColoredCard";
 import Rectangle from "../images/Rectangle.png";
 import Navbar from "../components/Navbar";
+import DefaultLayout from "../layouts/DefaultLayout";
+import SmallerColorCard from "../components/SmallerColorCard";
 
 export default function Home() {
   return (
@@ -17,120 +19,211 @@ export default function Home() {
         className="overflow-x-hidden bg-transparent text-black"
         data-theme="emerald"
       >
-        <Navbar />
-        <div className="flex items-center justify-center bg-[#DCFFEB] py-8 mt-20 mb-10">
-          <div className="flex flex-col">
-            <h1 className="text-6xl font-bold">TECHNOLOGY</h1>
-            <span className="text-2xl">Chemotronix web stack</span>
-          </div>
-        </div>
-        <div className="mx-auto w-[80%] py-10 flex items-center gap-10 justify-center lg:flex-nowrap flex-wrap">
-          <div className="shadow rounded shadow-[#DCFFEB] px-4 py-7 border-2 border-[#DCFFEB]">
-            <h6 className="text-3xl">Application</h6>
-            <br />
-            <div className="flex items-center gap-3">
-              <ColoredCard
-                text={
-                  <span>
-                    DER
-                    <br />
-                    Management
-                  </span>
-                }
-                color={"#DCFFEB"}
-              />
-              <ColoredCard text={"E-mobility"} color={"#FFFED4"} />
-              <ColoredCard text={"Traceability"} color={"#DCFFEB"} />
-              <ColoredCard text={"DeFi"} color={"#FFFED4"} />
+        <DefaultLayout>
+          <div className="flex items-center justify-center bg-[#DCFFEB] py-8 mt-20 mb-10">
+            <div className="flex flex-col">
+              <h1 className="text-6xl font-bold">TECHNOLOGY</h1>
+              <span className="text-2xl">Chemotronix web stack</span>
             </div>
           </div>
-          <div className="py-7 px-10 border-2 shadow rounded shadow-[#DCFFEB] border-[#DCFFEB] max-w-[385px] z-40">
-            <h6 className="text-4xl mb-2">Details</h6>
-            <hr />
-            <p className="max-w-sm my-10">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Penatibus
-              augue ultrices imperdiet ut. Non consectetur feugiat est viverra
-              feugiat sed habitasse. Id sapien amet pulvinar in risus semper in
-              elit turpis. Non, faucibus id ultricies porttitor senectus.
-            </p>
-          </div>
-        </div>
-        <div className="grid grid-cols-6 bg-cus lg:-mt-20 mt-0 relative">
-          <div className="col-span-6 absolute">
-            <Image
-              src={Rectangle}
-              style={{ zIndex: -10, marginBottom: "-88px" }}
-            />
-          </div>
-          <div className="col-span-1"></div>
-          <div className="lg:col-span-2 col-span-6 pr-10 lg:pr-0 flex flex-col w-full  pl-12 ">
-            <div className="shadow rounded shadow-[#DCFFEB] px-4 py-7 border-2 border-[#DCFFEB] bg-white">
-              <h6 className="text-3xl">Infrastructure</h6>
+          <div className="mx-auto w-[80%] py-10 flex items-center gap-10 justify-center lg:flex-nowrap flex-wrap">
+            <div className="shadow rounded shadow-[#DCFFEB] bg-white px-4 z-40 py-7 border-2 border-[#DCFFEB]">
+              <h6 className="text-3xl">Application</h6>
               <br />
-              <ColoredCard text={"Identity Solution"} color={"#DCFFEB"} long />
-              <br />
-              <ColoredCard text={"Utility Layer"} color={"#FFFED4"} long />
-            </div>
-            <br /> <br />
-            <div className="shadow rounded shadow-[#DCFFEB] px-4 py-7 border-2 border-[#DCFFEB] bg-white">
-              <h6 className="text-3xl">Trusted Layer</h6>
-              <br />
-              <div className="flex items-center gap-5">
-                <ColoredCard
-                  text={
-                    <span>
-                      Energy Web Token
-                      <br />
-                      (EWT)
-                    </span>
-                  }
-                  color={"#DCFFEB"}
-                />
-                <ColoredCard text={"Validator Nodes"} color={"#DCFFEB"} />
-                <ColoredCard text={"Block Explorer"} color={"#DCFFEB"} />
+              <div className="flex md:flex-row flex-col gap-3">
+                <div className="flex flex-col w-full items-center bg-[#DCFFEB] px-1 py-2 shadow rounded">
+                  <div className="col-span-2">
+                    <ColoredCard
+                      text={
+                        <span>
+                          DER
+                          <br />
+                          Management
+                        </span>
+                      }
+                      color={"#DCFFEB"}
+                      noShadow
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 mt-2 w-full">
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      boldText={"registry"}
+                      color={"#2CE773"}
+                      text={"DENA Identity"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      boldText={"registry"}
+                      color={"#2CE773"}
+                      text={"DENA Identity"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      color={"#2CE773"}
+                      boldText={"registry"}
+                      text={"DENA Identity"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      color={"#2CE773"}
+                      boldText={"registry"}
+                      text={"DENA Identity"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      color={"#2CE773"}
+                      boldText={"registry"}
+                      text={"DENA Identity"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      color={"#2CE773"}
+                      boldText={"registry"}
+                      text={"DENA Identity"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      color={"#2CE773"}
+                      boldText={"registry"}
+                      text={"DENA Identity"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      color={"#2CE773"}
+                      boldText={"registry"}
+                      text={"DENA Identity"}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col bg-[#FFFED4] w-full items-center md:mx-0 mx-auto md:my-0 my-5 px-1 py-2 rounded shadow">
+                  {/* <ColoredCard text={"E-mobility"} color={"#FFFED4"} noShadow /> */}
+                  <p className="p-4 min-h-[60px] max-h-[60px]">E-mobility</p>
+                  <div className="grid grid-cols-1 md:w-fit w-full gap-3 mt-2">
+                    <SmallerColorCard
+                      textColor={"#B0A81E"}
+                      color={"#FCEF22"}
+                      boldText={"E-Mobility Dashboard"}
+                      text={"Elia"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#B0A81E"}
+                      color={"#FCEF22"}
+                      boldText={"E-Mobility Dashboard"}
+                      text={"Elia"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#B0A81E"}
+                      color={"#FCEF22"}
+                      boldText={"E-Mobility Dashboard"}
+                      text={"Elia"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#B0A81E"}
+                      color={"#FCEF22"}
+                      boldText={"E-Mobility Dashboard"}
+                      text={"Elia"}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col bg-[#DCFFEB] w-full items-center md:mx-0 mx-auto md:my-0 my-5 px-1 py-2 rounded shadow">
+                  <p className="p-4 min-h-[60px] max-h-[60px]">Traceability</p>
+                  <div className="grid grid-cols-1 md:w-fit w-full gap-3 mt-2">
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      color={"#2CE773"}
+                      boldText={"E-Mobility Dashboard"}
+                      text={"Elia"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      color={"#2CE773"}
+                      boldText={"E-Mobility Dashboard"}
+                      text={"Elia"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      color={"#2CE773"}
+                      boldText={"E-Mobility Dashboard"}
+                      text={"Elia"}
+                    />
+                    <SmallerColorCard
+                      textColor={"#00861A"}
+                      color={"#2CE773"}
+                      boldText={"E-Mobility Dashboard"}
+                      text={"Elia"}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col bg-[#FFFED4] w-full items-center md:mx-0 mx-auto md:my-0 my-5 px-1 py-2 rounded shadow">
+                  <p className="p-4 min-h-[60px] max-h-[60px]">DeFi</p>
+                  <div className="grid grid-cols-1 md:w-fit w-full gap-3 mt-2 mb-auto">
+                    <SmallerColorCard
+                      textColor={"#B0A81E"}
+                      color={"#FCEF22"}
+                      boldText={"E-Mobility Dashboard"}
+                      text={"Elia"}
+                    />
+                  </div>
+                </div>
               </div>
-              <br />
-              <ColoredCard text={"Utility Layer"} color={"#FFFED4"} long />
+            </div>
+            <div className="py-7 px-10 border-2 shadow rounded shadow-[#DCFFEB] border-[#DCFFEB] max-w-[385px] z-40 bg-white">
+              <h6 className="text-4xl mb-2">Details</h6>
+              <hr />
+              <p className="max-w-sm my-10">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Penatibus augue ultrices imperdiet ut. Non consectetur feugiat
+                est viverra feugiat sed habitasse. Id sapien amet pulvinar in
+                risus semper in elit turpis. Non, faucibus id ultricies
+                porttitor senectus.
+              </p>
             </div>
           </div>
-        </div>
-        <footer className="footer mx-auto px-16 py-28">
-          <div>
-            <h1 className=" text-4xl text-black font-bold">WHAT WE DO</h1>
-            <a className="link link-hover">Technology</a>
-            <a className="link link-hover">Our solutions</a>
-            <a className="link link-hover">Projects Map</a>
-            <a className="link link-hover">Case Studies</a>
+          <div className="grid grid-cols-6 bg-cus lg:-mt-52 mt-0 relative">
+            <div className="col-span-6 absolute md:block hidden">
+              <Image
+                src={Rectangle}
+                style={{ zIndex: -10, marginBottom: "-88px" }}
+              />
+            </div>
+            <div className="col-span-1"></div>
+            <div className="lg:col-span-2 col-span-6 pr-10 lg:pr-0 flex flex-col w-full  pl-12 mt-52">
+              <div className="shadow rounded shadow-[#DCFFEB] px-4 py-7 border-2 border-[#DCFFEB] bg-white">
+                <h6 className="text-3xl">Infrastructure</h6>
+                <br />
+                <ColoredCard
+                  text={"Identity Solution"}
+                  color={"#DCFFEB"}
+                  long
+                />
+                <br />
+                <ColoredCard text={"Utility Layer"} color={"#FFFED4"} long />
+              </div>
+              <br /> <br />
+              <div className="shadow rounded shadow-[#DCFFEB] px-4 py-7 border-2 border-[#DCFFEB] bg-white">
+                <h6 className="text-3xl">Trusted Layer</h6>
+                <br />
+                <div className="flex md:flex-row flex-col items-center gap-5">
+                  <ColoredCard
+                    text={
+                      <span>
+                        Energy Web Token
+                        <br />
+                        (EWT)
+                      </span>
+                    }
+                    color={"#DCFFEB"}
+                  />
+                  <ColoredCard text={"Validator Nodes"} color={"#DCFFEB"} />
+                  <ColoredCard text={"Block Explorer"} color={"#DCFFEB"} />
+                </div>
+                <br />
+                <ColoredCard text={"Utility Layer"} color={"#FFFED4"} long />
+              </div>
+            </div>
           </div>
-          <div>
-            <h1 className=" text-4xl text-black font-bold">INDUSTRIES</h1>
-            <a className="link link-hover">About us</a>
-            <a className="link link-hover">Contact</a>
-            <a className="link link-hover">Jobs</a>
-            <a className="link link-hover">Press kit</a>
-          </div>
-          <div>
-            <h1 className=" text-4xl text-black font-bold">BUILD</h1>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
-          </div>
-          <div>
-            <h1 className=" text-4xl text-black font-bold">LEARN</h1>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
-          </div>
-          <div>
-            <h1 className=" text-4xl text-black font-bold">ABOUT</h1>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
-          </div>
-        </footer>
-        <footer className="bg-[#E9F4FB] flex items-center justify-center py-6">
-          <p>Copyright ©2022. All right reserved | Chemotronix</p>
-        </footer>
+        </DefaultLayout>
       </main>
     </div>
   );

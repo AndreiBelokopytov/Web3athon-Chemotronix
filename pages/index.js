@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import QuoteSection from "../components/QuoteSection";
 import TeamSection from "../components/TeamSection";
 import ThirdSection from "../components/ThirdSection";
+import DefaultLayout from "../layouts/DefaultLayout";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -21,49 +22,13 @@ export default function Home() {
         className="overflow-x-hidden bg-transparent text-black"
         data-theme="emerald"
       >
-        <Navbar />
-        <Hero />
-        <QuoteSection />
-        <ThirdSection />
-        <TeamSection />
-        <ContactSection />
-        <footer className="footer mx-auto px-16 py-28">
-          <div>
-            <h1 className=" text-4xl text-black font-bold">WHAT WE DO</h1>
-            <a className="link link-hover">Technology</a>
-            <a className="link link-hover">Our solutions</a>
-            <a className="link link-hover">Projects Map</a>
-            <a className="link link-hover">Case Studies</a>
-          </div>
-          <div>
-            <h1 className=" text-4xl text-black font-bold">INDUSTRIES</h1>
-            <a className="link link-hover">About us</a>
-            <a className="link link-hover">Contact</a>
-            <a className="link link-hover">Jobs</a>
-            <a className="link link-hover">Press kit</a>
-          </div>
-          <div>
-            <h1 className=" text-4xl text-black font-bold">BUILD</h1>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
-          </div>
-          <div>
-            <h1 className=" text-4xl text-black font-bold">LEARN</h1>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
-          </div>
-          <div>
-            <h1 className=" text-4xl text-black font-bold">ABOUT</h1>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
-          </div>
-        </footer>
-        <footer className="bg-[#E9F4FB] flex items-center justify-center py-6">
-          <p>Copyright ©2022. All right reserved | Chemotronix</p>
-        </footer>
+        <DefaultLayout>
+          <Hero />
+          <QuoteSection />
+          <ThirdSection />
+          <TeamSection />
+          <ContactSection />
+        </DefaultLayout>
       </main>
     </div>
   );

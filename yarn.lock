@@ -1118,6 +1118,11 @@
   "resolved" "https://registry.npmjs.org/hey-listen/-/hey-listen-1.0.8.tgz"
   "version" "1.0.8"
 
+"iconoir@^5.3.0":
+  "integrity" "sha512-1eGwB2J4TenuEfpuHC8fpr0VKmRs8vG6T6WrQIFwCOZRJ4BHZKlXjopHlm3bPZtBX/hY7p+3lZeIFiBcPfCdcw=="
+  "resolved" "https://registry.npmjs.org/iconoir/-/iconoir-5.3.0.tgz"
+  "version" "5.3.0"
+
 "ignore@^5.2.0":
   "integrity" "sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ=="
   "resolved" "https://registry.npmjs.org/ignore/-/ignore-5.2.0.tgz"

@@ -3,7 +3,7 @@ import LetterCircle from "./LetterCircle";
 
 function TeamSection() {
   return (
-    <div className="min-h-[50vh] pt-10">
+    <div className="min-h-[50vh] pt-20 pb-20">
       <div className="flex items-center  justify-center my-auto">
         <div className="flex items-center flex-wrap w-[80%] mx-auto justify-between mt-auto">
           <div className=" max-w-lg">

@@ -31,7 +31,8 @@ p {
   display: none;
 }
 
-.third-sectio,.bg-cus {
+.third-section,
+.bg-cus {
   background-image: url("../images/Vector\ \(3\).png");
   background-repeat: no-repeat;
 }
