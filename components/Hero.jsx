@@ -50,10 +50,8 @@ function Hero() {
           <Image src={HeroPic} />
         </motion.div>
       </div>
-      <div className="flex items-center md:flex-row flex-col justify-between mx-auto -mb-10  w-[80%]">
+      <div className="flex items-center justify-center md:flex-row flex-col  mx-auto -mb-10  w-[80%]">
         <HeroCard number={"2022"} text="Founded" />
-        <HeroCard number={"14,000"} text="Token supplied" />
-        <HeroCard number={"1000"} text="Users" />
       </div>
     </div>
   );

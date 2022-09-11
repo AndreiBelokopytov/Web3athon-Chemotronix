@@ -3,10 +3,10 @@ import Navbar from "../components/Navbar";
 
 function DefaultLayout({ children }) {
   return (
-    <>
+    <div>
       <Navbar />
       {children}
-      <footer className="footer mx-auto px-16 py-28">
+      <div className="footer mx-auto px-16 py-28">
         <div>
           <h1 className=" text-4xl text-black font-bold">WHAT WE DO</h1>
           <a className="link link-hover">Technology</a>
@@ -39,11 +39,11 @@ function DefaultLayout({ children }) {
           <a className="link link-hover">Privacy policy</a>
           <a className="link link-hover">Cookie policy</a>
         </div>
-      </footer>
-      <footer className="bg-[#E9F4FB] flex items-center justify-center py-6">
+      </div>
+      <div className="bg-[#E9F4FB] flex items-center justify-center py-6">
         <p>Copyright ©2022. All right reserved | Chemotronix</p>
-      </footer>
-    </>
+      </div>
+    </div>
   );
 }
 
