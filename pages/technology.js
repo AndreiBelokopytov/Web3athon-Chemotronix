@@ -26,149 +26,187 @@ export default function Home() {
               <span className="text-2xl">Chemotronix web stack</span>
             </div>
           </div>
-          <div className="mx-auto w-[80%] py-10 flex items-center gap-10 justify-center lg:flex-nowrap flex-wrap">
-            <div className="shadow rounded shadow-[#DCFFEB] bg-white px-4 z-40 py-7 border-2 border-[#DCFFEB]">
-              <h6 className="text-3xl">Application</h6>
-              <br />
-              <div className="flex md:flex-row flex-col gap-3">
-                <div className="flex flex-col w-full items-center bg-[#DCFFEB] px-1 py-2 shadow rounded">
-                  <div className="col-span-2">
-                    <ColoredCard
-                      text={
-                        <span>
-                          DER
-                          <br />
-                          Management
-                        </span>
-                      }
-                      color={"#DCFFEB"}
-                      noShadow
-                    />
+          <div className="mx-auto w-[80%] py-10 flex  gap-10 justify-center lg:flex-nowrap flex-wrap">
+            <div className="flex flex-col">
+              <div className="shadow rounded shadow-[#DCFFEB] bg-white px-4 z-40 py-7 border-2 border-[#DCFFEB]">
+                <h6 className="text-3xl">Application</h6>
+                <br />
+                <div className="flex md:flex-row flex-col gap-3">
+                  <div className="flex flex-col w-full md:w-auto items-center bg-[#DCFFEB] px-1 py-2 shadow rounded h-fit">
+                    <div className="col-span-2">
+                      <ColoredCard
+                        text={
+                          <span>
+                            DER
+                            <br />
+                            Management
+                          </span>
+                        }
+                        color={"#DCFFEB"}
+                        noShadow
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 mt-2 w-full">
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        boldText={"registry"}
+                        color={"#2CE773"}
+                        text={"DENA Identity"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        boldText={"registry"}
+                        color={"#2CE773"}
+                        text={"DENA Identity"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        color={"#2CE773"}
+                        boldText={"registry"}
+                        text={"DENA Identity"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        color={"#2CE773"}
+                        boldText={"registry"}
+                        text={"DENA Identity"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        color={"#2CE773"}
+                        boldText={"registry"}
+                        text={"DENA Identity"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        color={"#2CE773"}
+                        boldText={"registry"}
+                        text={"DENA Identity"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        color={"#2CE773"}
+                        boldText={"registry"}
+                        text={"DENA Identity"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        color={"#2CE773"}
+                        boldText={"registry"}
+                        text={"DENA Identity"}
+                      />
+                    </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-3 mt-2 w-full">
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      boldText={"registry"}
-                      color={"#2CE773"}
-                      text={"DENA Identity"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      boldText={"registry"}
-                      color={"#2CE773"}
-                      text={"DENA Identity"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      color={"#2CE773"}
-                      boldText={"registry"}
-                      text={"DENA Identity"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      color={"#2CE773"}
-                      boldText={"registry"}
-                      text={"DENA Identity"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      color={"#2CE773"}
-                      boldText={"registry"}
-                      text={"DENA Identity"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      color={"#2CE773"}
-                      boldText={"registry"}
-                      text={"DENA Identity"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      color={"#2CE773"}
-                      boldText={"registry"}
-                      text={"DENA Identity"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      color={"#2CE773"}
-                      boldText={"registry"}
-                      text={"DENA Identity"}
-                    />
+                  <div className="flex flex-col bg-[#FFFED4] w-full md:w-auto items-center md:mx-0 mx-auto md:my-0 my-5 px-1 py-2 rounded shadow">
+                    {/* <ColoredCard text={"E-mobility"} color={"#FFFED4"} noShadow /> */}
+                    <p className="p-4 min-h-[60px] max-h-[60px]">E-mobility</p>
+                    <div className="grid grid-cols-1 md:w-fit w-full gap-4 mt-2">
+                      <SmallerColorCard
+                        textColor={"#B0A81E"}
+                        color={"#FCEF22"}
+                        boldText={"E-Mobility Dashboard"}
+                        text={"Elia"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#B0A81E"}
+                        color={"#FCEF22"}
+                        boldText={"E-Mobility Dashboard"}
+                        text={"Elia"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#B0A81E"}
+                        color={"#FCEF22"}
+                        boldText={"E-Mobility Dashboard"}
+                        text={"Elia"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#B0A81E"}
+                        color={"#FCEF22"}
+                        boldText={"E-Mobility Dashboard"}
+                        text={"Elia"}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col bg-[#FFFED4] w-full items-center md:mx-0 mx-auto md:my-0 my-5 px-1 py-2 rounded shadow">
-                  {/* <ColoredCard text={"E-mobility"} color={"#FFFED4"} noShadow /> */}
-                  <p className="p-4 min-h-[60px] max-h-[60px]">E-mobility</p>
-                  <div className="grid grid-cols-1 md:w-fit w-full gap-3 mt-2">
-                    <SmallerColorCard
-                      textColor={"#B0A81E"}
-                      color={"#FCEF22"}
-                      boldText={"E-Mobility Dashboard"}
-                      text={"Elia"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#B0A81E"}
-                      color={"#FCEF22"}
-                      boldText={"E-Mobility Dashboard"}
-                      text={"Elia"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#B0A81E"}
-                      color={"#FCEF22"}
-                      boldText={"E-Mobility Dashboard"}
-                      text={"Elia"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#B0A81E"}
-                      color={"#FCEF22"}
-                      boldText={"E-Mobility Dashboard"}
-                      text={"Elia"}
-                    />
+                  <div className="flex flex-col bg-[#DCFFEB] w-full md:w-auto items-center md:mx-0 mx-auto md:my-0 my-5 px-1 py-2 rounded shadow h-fit">
+                    <p className="p-4 min-h-[60px] max-h-[60px]">
+                      Traceability
+                    </p>
+                    <div className="grid grid-cols-1 md:w-fit w-full gap-4 mt-2">
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        color={"#2CE773"}
+                        boldText={"E-Mobility Dashboard"}
+                        text={"Elia"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        color={"#2CE773"}
+                        boldText={"E-Mobility Dashboard"}
+                        text={"Elia"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        color={"#2CE773"}
+                        boldText={"E-Mobility Dashboard"}
+                        text={"Elia"}
+                      />
+                      <SmallerColorCard
+                        textColor={"#00861A"}
+                        color={"#2CE773"}
+                        boldText={"E-Mobility Dashboard"}
+                        text={"Elia"}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col bg-[#DCFFEB] w-full items-center md:mx-0 mx-auto md:my-0 my-5 px-1 py-2 rounded shadow">
-                  <p className="p-4 min-h-[60px] max-h-[60px]">Traceability</p>
-                  <div className="grid grid-cols-1 md:w-fit w-full gap-3 mt-2">
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      color={"#2CE773"}
-                      boldText={"E-Mobility Dashboard"}
-                      text={"Elia"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      color={"#2CE773"}
-                      boldText={"E-Mobility Dashboard"}
-                      text={"Elia"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      color={"#2CE773"}
-                      boldText={"E-Mobility Dashboard"}
-                      text={"Elia"}
-                    />
-                    <SmallerColorCard
-                      textColor={"#00861A"}
-                      color={"#2CE773"}
-                      boldText={"E-Mobility Dashboard"}
-                      text={"Elia"}
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col bg-[#FFFED4] w-full items-center md:mx-0 mx-auto md:my-0 my-5 px-1 py-2 rounded shadow">
-                  <p className="p-4 min-h-[60px] max-h-[60px]">DeFi</p>
-                  <div className="grid grid-cols-1 md:w-fit w-full gap-3 mt-2 mb-auto">
-                    <SmallerColorCard
-                      textColor={"#B0A81E"}
-                      color={"#FCEF22"}
-                      boldText={"E-Mobility Dashboard"}
-                      text={"Elia"}
-                    />
+                  <div className="flex flex-col bg-[#FFFED4] w-full md:w-auto items-center md:mx-0 mx-auto md:my-0 my-5 px-1 py-2 rounded shadow h-fit">
+                    <p className="p-4 min-h-[60px] max-h-[60px]">DeFi</p>
+                    <div className="grid grid-cols-1 md:w-fit w-full gap-4 mt-2 mb-auto">
+                      <SmallerColorCard
+                        textColor={"#B0A81E"}
+                        color={"#FCEF22"}
+                        boldText={"E-Mobility Dashboard"}
+                        text={"Elia"}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
+              <div className="  pr-10 lg:pr-0 flex flex-col z-40    mt-[100px]">
+                <div className="shadow rounded shadow-[#DCFFEB] px-4 py-7 border-2 border-[#DCFFEB] bg-white ">
+                  <h6 className="text-3xl">Infrastructure</h6>
+                  <br />
+                  <ColoredCard
+                    text={"Identity Solution"}
+                    color={"#DCFFEB"}
+                    long
+                  />
+                  <br />
+                  <ColoredCard text={"Utility Layer"} color={"#FFFED4"} long />
+                </div>
+                <br /> <br />
+                <div className="shadow rounded shadow-[#DCFFEB] px-4 py-7 border-2 border-[#DCFFEB] bg-white">
+                  <h6 className="text-3xl">Trusted Layer</h6>
+                  <br />
+                  <div className="flex md:flex-row flex-col items-center gap-5">
+                    <ColoredCard
+                      text={
+                        <span>
+                          Energy Web Token
+                          <br />
+                          (EWT)
+                        </span>
+                      }
+                      color={"#DCFFEB"}
+                    />
+                    <ColoredCard text={"Validator Nodes"} color={"#DCFFEB"} />
+                    <ColoredCard text={"Block Explorer"} color={"#DCFFEB"} />
+                  </div>
+                  <br />
+                  <ColoredCard text={"Utility Layer"} color={"#FFFED4"} long />
+                </div>
+              </div>
             </div>
-            <div className="py-7 px-10 border-2 shadow rounded shadow-[#DCFFEB] border-[#DCFFEB] max-w-[385px] z-40 bg-white">
+            <div className="py-7 px-10 border-2 shadow rounded shadow-[#DCFFEB] border-[#DCFFEB] max-w-[385px] z-40 bg-white h-fit">
               <h6 className="text-4xl mb-2">Details</h6>
               <hr />
               <p className="max-w-sm my-10">
@@ -180,7 +218,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-6 bg-cus lg:-mt-52 mt-0 relative">
+          <div className="flex bg-cus -mt-[960px] mb-[230px]  relative h-[700px] w-full">
             <div className="col-span-6 absolute md:block hidden">
               <Image
                 src={Rectangle}
@@ -188,40 +226,7 @@ export default function Home() {
               />
             </div>
             <div className="col-span-1"></div>
-            <div className="lg:col-span-2 col-span-6 pr-10 lg:pr-0 flex flex-col w-full  pl-12 mt-52">
-              <div className="shadow rounded shadow-[#DCFFEB] px-4 py-7 border-2 border-[#DCFFEB] bg-white">
-                <h6 className="text-3xl">Infrastructure</h6>
-                <br />
-                <ColoredCard
-                  text={"Identity Solution"}
-                  color={"#DCFFEB"}
-                  long
-                />
-                <br />
-                <ColoredCard text={"Utility Layer"} color={"#FFFED4"} long />
-              </div>
-              <br /> <br />
-              <div className="shadow rounded shadow-[#DCFFEB] px-4 py-7 border-2 border-[#DCFFEB] bg-white">
-                <h6 className="text-3xl">Trusted Layer</h6>
-                <br />
-                <div className="flex md:flex-row flex-col items-center gap-5">
-                  <ColoredCard
-                    text={
-                      <span>
-                        Energy Web Token
-                        <br />
-                        (EWT)
-                      </span>
-                    }
-                    color={"#DCFFEB"}
-                  />
-                  <ColoredCard text={"Validator Nodes"} color={"#DCFFEB"} />
-                  <ColoredCard text={"Block Explorer"} color={"#DCFFEB"} />
-                </div>
-                <br />
-                <ColoredCard text={"Utility Layer"} color={"#FFFED4"} long />
-              </div>
-            </div>
+            <div className="mx-auto w-[50%]"></div>
           </div>
         </DefaultLayout>
       </main>
