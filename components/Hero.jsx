@@ -69,7 +69,7 @@ function Hero() {
           <label className="modal-box w-fit px-10 relative">
             <div className="w-full">
               <p className="mx-auto w-[50%]">Add</p>
-              <h1 className="text-4xl md:text-6xl font-bold mx-auto w-[50%]">
+              <h1 className="text-4xl md:text-6xl font-bold mx-auto  w-[50%]">
                 WALLET
               </h1>
             </div>
