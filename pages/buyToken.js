@@ -7,7 +7,7 @@ import Footer from "../components/footer";
 import Link from "next/link";
 
 
-const buyToken = () => {
+const BuyToken = () => {
   const [showBuying, setShowBuying] = useState(false)
   const [buying, setBuying] = useState('Co2E')
 
@@ -92,4 +92,4 @@ const buyToken = () => {
   )
 }
 
-export default buyToken
+export default BuyToken

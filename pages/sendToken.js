@@ -7,7 +7,7 @@ import Footer from "../components/footer";
 import Link from "next/link";
 
 
-const sendToken = () => {
+const SendToken = () => {
   const [showBuying, setShowBuying] = useState(false)
   const [buying, setBuying] = useState('Co2E')
 
@@ -93,4 +93,4 @@ const sendToken = () => {
   )
 }
 
-export default sendToken
+export default SendToken
