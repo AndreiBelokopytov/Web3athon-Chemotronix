@@ -19,6 +19,7 @@ h5 {
 p {
   font-family: "Montserrat", sans-serif;
 }
+
 @media (min-width: 400px) {
   .mobilegrad {
     display: none;

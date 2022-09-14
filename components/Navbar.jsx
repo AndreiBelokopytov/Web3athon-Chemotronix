@@ -9,7 +9,7 @@ function Navbar() {
   const [mobileNav, setMobileNav] = React.useState(false);
   return (
     <div>
-      <div className="lg:flex items-center justify-between navbar py-2 mx-auto w-[80%]">
+      <div className="lg:flex items-center justify-between navbar py-2 ">
         <Image
           src={Logo}
           style={{ zIndex: 40 }}
