@@ -1,10 +1,10 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 
-function DefaultLayout({ children }) {
+function DefaultLayout({ children, refScroll, aboutRef, teamRef }) {
   return (
     <div>
-      <Navbar />
+      <Navbar refScroll={refScroll} aboutRef={aboutRef} teamRef={teamRef} />
       {children}
       <div className="footer mx-auto px-16 py-28">
         <div>
