@@ -29,17 +29,11 @@ export default function Home() {
         className="overflow-x-hidden bg-transparent text-black"
         data-theme="emerald"
       >
-        <DefaultLayout
-          refScroll={refScroll}
-          aboutRef={aboutRef}
-          teamRef={teamRef}
-        >
           <Hero />
           <QuoteSection />
           <ThirdSection aboutRef={aboutRef} />
           <TeamSection teamRef={teamRef} />
           <ContactSection />
-        </DefaultLayout>
       </main>
     </div>
   );

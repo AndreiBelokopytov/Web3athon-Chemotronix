@@ -4,7 +4,7 @@ import Logo from "../images/logo.png";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-function Navbar({ refScroll, aboutRef, teamRef }) {
+function Navbar() {
   const router = useRouter();
   const [mobileNav, setMobileNav] = React.useState(false);
   return (
@@ -33,7 +33,7 @@ function Navbar({ refScroll, aboutRef, teamRef }) {
             </a>
             <ul className="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40 w-[164px]">
               <li
-                onClick={() => refScroll(aboutRef)}
+                
                 className="active:!bg-primary"
               >
                 <a>About us</a>
@@ -59,7 +59,7 @@ function Navbar({ refScroll, aboutRef, teamRef }) {
             </a>
             <ul className="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40">
               <li
-                onClick={() => refScroll(aboutRef)}
+                
                 className="active:!bg-primary"
               >
                 <a>About us</a>
@@ -85,7 +85,7 @@ function Navbar({ refScroll, aboutRef, teamRef }) {
             </a>
             <ul className="py-2 px-1 border-t-2 border-primary bg-[#DCFFEB] z-40 w-[108px]">
               <li
-                onClick={() => refScroll(aboutRef)}
+                
                 className="active:!bg-primary"
               >
                 <a>About us</a>
@@ -97,9 +97,6 @@ function Navbar({ refScroll, aboutRef, teamRef }) {
           </li>
           <li
             className="active:!bg-primary"
-            onClick={() => {
-              refScroll(teamRef);
-            }}
           >
             <a href="#team" className="font-[400] text-[#01431D] text-lg">
               Team
@@ -177,7 +174,7 @@ function Navbar({ refScroll, aboutRef, teamRef }) {
               style={{ position: "initial" }}
             >
               <li
-                onClick={() => refScroll(aboutRef)}
+                
                 className="active:!bg-primary"
               >
                 <a>About us</a>
@@ -206,7 +203,7 @@ function Navbar({ refScroll, aboutRef, teamRef }) {
               style={{ position: "initial" }}
             >
               <li
-                onClick={() => refScroll(aboutRef)}
+                
                 className="active:!bg-primary"
               >
                 <a>About us</a>
@@ -235,7 +232,7 @@ function Navbar({ refScroll, aboutRef, teamRef }) {
               style={{ position: "initial" }}
             >
               <li
-                onClick={() => refScroll(aboutRef)}
+                
                 className="active:!bg-primary"
               >
                 <a>About us</a>
@@ -245,7 +242,7 @@ function Navbar({ refScroll, aboutRef, teamRef }) {
               </li>
             </ul>
           </li>
-          <li className="active:!bg-primary" onClick={() => refScroll(teamRef)}>
+          <li className="active:!bg-primary" >
             <a
               href="#"
               className="font-[400] text-[#01431D] text-lg border-[#99F5C0] border-b-2"
