@@ -22,13 +22,11 @@ export default function Home() {
         className="overflow-x-hidden bg-transparent text-black"
         data-theme="emerald"
       >
-        <DefaultLayout>
           <Hero />
           <QuoteSection />
           <ThirdSection />
           <TeamSection />
           <ContactSection />
-        </DefaultLayout>
       </main>
     </div>
   );

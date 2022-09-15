@@ -6,6 +6,9 @@ import HeroGradientMobile from "../images/mobilegrad.png";
 import Rectangle from "../images/Rectangle.png";
 import HeroCard from "./HeroCard";
 import { motion } from "framer-motion";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+
+
 function Hero() {
   return (
     <div className="relative md:mt-0 mt-10">
@@ -37,9 +40,8 @@ function Hero() {
             Bridging the gap to reducing greenhouse gas emissions using IoT and
             BlockChain to acheiving net zero by 2050
           </p>
-          <button className="bg-[#008036] text-white rounded-md py-2 px-5 mt-5">
-            Get started
-          </button>
+          <div className="pt-7 h-3 w-full"></div>
+          <ConnectButton/>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: 90 }}
