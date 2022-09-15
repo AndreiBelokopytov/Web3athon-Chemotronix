@@ -7,15 +7,75 @@ import Image from "next/image";
 import empty from "../images/empty.svg";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import axios from "axios";
+import { useEffect } from "react";
+import { BASE_URL } from "../utils/global";
 
 export default function SignedIn() {
   const [buyCarbon, setBuyCarbon] = useState(false);
   const [showUsage, setShowUsage] = useState(false);
+  // const [cidArray, setCidArray] = useState(null);
+  const [devices, setDevices] = useState(null);
 
   const toggleBuyCarbon = () => {
     setBuyCarbon(!buyCarbon);
   };
+  let config = {
+    headers: {
+      Authorization:
+        "Bearer " +
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweENBOTRiNERGRkYxZDMzMjYxOUVhZjMxRTBjRTlDNzNCYjI4QzJERTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjIyMTgxMDg5ODksIm5hbWUiOiJUZXN0IDAyIn0.hEHqeerV5xEWU9OLXhZPXup1EaATXJlLVDzAX4fz0CU",
+    },
+  };
+  useEffect(() => {
+    carbonData();
+  }, []);
+  const carbonData = () => {
+    axios
+      .get(
+        `${BASE_URL}/user/uploads?before=2020-07-27T17%3A32%3A28Z&page=1&size=10`,
+        config
+      )
+      .then((response) => {
+        console.log(response);
+        let arr = [];
+        response?.data.map((ob, i) => {
+          return arr.push({
+            deviceId: ob.name.slice(19),
+            dataLink: ob.cid + ".ipfs.w3s.link",
+          });
+        });
+        setDevices([...arr]);
+        console.log(arr);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+  // useEffect(() => {
+  //   if (cidArray) {
+  //     getUsers();
+  //   }
+  // }, [cidArray]);
+
+  // function getUsers() {
+  //   cidArray.map((e) => {
+  //     return axios
+  //       .get(`https://api.web3.storage/user/uploads/${e}`, config)
+  //       .then((response) => {
+  //         console.log(response, "res");
+  //         newArr.push(response.data.name);
+  //         setUsers([...users, ...newArr]);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   });
+  // }
+  // useEffect(() => {
+  //   console.log(users);
+  // }, [users]);
   return (
     <div>
       <Head>
