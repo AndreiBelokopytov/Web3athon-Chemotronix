@@ -6,10 +6,10 @@ import HeroGradientMobile from "../images/mobilegrad.png";
 import Rectangle from "../images/Rectangle.png";
 import HeroCard from "./HeroCard";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-
-
 function Hero() {
+  const router = useRouter();
   return (
     <div className="relative md:mt-0 mt-10">
       <div className="absolute md:-bottom-3 md:top-auto top-40 destop-hero-grad  left-0 right-0   ">
@@ -40,7 +40,6 @@ function Hero() {
             Bridging the gap to reducing greenhouse gas emissions using IoT and
             BlockChain to acheiving net zero by 2050
           </p>
-          <div className="pt-7 h-3 w-full"></div>
           <ConnectButton/>
         </motion.div>
         <motion.div

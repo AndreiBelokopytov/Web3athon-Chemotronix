@@ -7,9 +7,9 @@ import blockchain from "../images/blockchain.png";
 import ai from "../images/ai.png";
 import cleanEnergy from "../images/clean-energy.png";
 import iot from "../images/iot.png";
-function ThirdSection() {
+function ThirdSection({ aboutRef }) {
   return (
-    <div className="third-section min-h-screen mx-auto">
+    <div className="third-section min-h-screen mx-auto" ref={aboutRef}>
       <div className="md:opacity-100 opacity-0">
         <Image src={Rectangle} style={{ zIndex: -10 }} />
       </div>
@@ -22,9 +22,8 @@ function ThirdSection() {
             Who are <span className="text-primary">we?</span>
           </h2>
           <p className="text-[25px] mt-5">
-            Chemotronix is a growing startup aim at developing clean energy
-            technologies and digital solutions to ensure net zero emissions
-            (decarbonization).
+            Developing clean energy technologies and digital solutions to ensure
+            net zero emissions(decarbonization).
           </p>
           <button className="btn-primary">Contact Us</button>
         </div>
@@ -34,7 +33,7 @@ function ThirdSection() {
           </h2>
           <p className="max-w-md text-[25px] mt-4 bg-[#FFFED5]">
             Ensuring data access to provide an easier framework for achieving
-            our planet goals
+            our planet goals.
           </p>
         </div>
       </div>
@@ -58,8 +57,8 @@ function ThirdSection() {
             Our <span className="text-primary">solution</span>
           </h2>
           <p className="text-[25px] mt-5">
-            At Chemotronix, we look forward to collaborating with organizations
-            to drive innovation towards ensuring a safer planet
+            Our solution is an interaction between IoT, AI, Blockchain and Clean
+            energy through real time monitoring and visualizations.
           </p>
           <div className="flex items-center justify-between mt-5">
             <Image src={ai} />

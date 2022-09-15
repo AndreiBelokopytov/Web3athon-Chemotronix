@@ -40,9 +40,7 @@ function MyApp({ Component, pageProps }) {
         overlayBlur: 'small',
       })}
       >
-        <DefaultLayout>
-          <Component {...pageProps} />
-        </DefaultLayout>
+        <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
   );
