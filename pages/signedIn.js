@@ -10,13 +10,14 @@ import Link from "next/link";
 import axios from "axios";
 import { useEffect } from "react";
 import { BASE_URL } from "../utils/global";
+import { useRouter } from "next/router";
 
 export default function SignedIn() {
   const [buyCarbon, setBuyCarbon] = useState(false);
   const [showUsage, setShowUsage] = useState(false);
   // const [cidArray, setCidArray] = useState(null);
   const [devices, setDevices] = useState(null);
-
+  const router = useRouter();
   const toggleBuyCarbon = () => {
     setBuyCarbon(!buyCarbon);
   };
@@ -104,7 +105,12 @@ export default function SignedIn() {
               </div>
               <div className="hidden lg:w-1/2 lg:flex lg:justify-end items-center">
                 <div className="bg-green-800 h-16 rounded-md cursor-pointer px-12 flex items-center">
-                  <p className=" text-white">Usage Chart</p>
+                  <p
+                    onClick={() => router.push("/usageChart")}
+                    className=" text-white"
+                  >
+                    Usage Chart
+                  </p>
                 </div>
               </div>
             </div>
