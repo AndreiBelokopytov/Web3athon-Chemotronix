@@ -6,7 +6,8 @@ import HeroGradientMobile from "../images/mobilegrad.png";
 import Rectangle from "../images/Rectangle.png";
 import HeroCard from "./HeroCard";
 import { motion } from "framer-motion";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Link from "next/link";
+
 
 
 function Hero() {
@@ -41,7 +42,11 @@ function Hero() {
             BlockChain to acheiving net zero by 2050
           </p>
           <div className="pt-7 h-3 w-full"></div>
-          <ConnectButton/>
+          <Link href={"/signedIn"}>
+            <div className="bg-[#008036] px-5 w-44 flex cursor-pointer rounded-md hover:scale-105 transition ease-in-out justify-center py-3">
+              <p className="text-lg font-bold text-white"> Get Started</p>
+            </div>
+          </Link>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: 90 }}

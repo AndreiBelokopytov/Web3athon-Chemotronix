@@ -5,11 +5,14 @@ import * as RiIcons from 'react-icons/ri';
 import { useState } from "react";
 import Footer from "../components/footer";
 import Link from "next/link";
+import { ethers } from "ethers";
+import connectContract from "../utils/connectContract";
 
 
 const BuyToken = () => {
   const [showBuying, setShowBuying] = useState(false)
   const [buying, setBuying] = useState('Co2E')
+  const [transferAmount, setTransferAmount] = useState("")
 
   const toggleBuying = () => {
     setShowBuying(!showBuying);
@@ -17,7 +20,77 @@ const BuyToken = () => {
   const changeBuying= (e) => {
     setBuying(e);
     setShowBuying(!showBuying)
+  }
+
+  async function handleSubmit (e) {
+    e.preventDefault();
+    
+    
+    const  body = {
+      amnt: transferAmount
+    }
+
+    try {
+      const response = await fetch("/api/store-event-data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (response.status !== 200) {
+        alert("Oops! Something went wrong. Please refresh and try again.");
+      } else {
+        console.log("Form successfully submitted!");
+        let responseJSON = await response.json();
+        await createEvent(responseJSON.cid);
+      }
+      // check response, if success is false, dont take them to success page
+    } catch (error) {
+      alert(
+        `Oops! Something went wrong. Please refresh and try again. Error ${error}`
+      );
+    }
+
+    const createEvent = async (cid) => {
+      try {
+        const chemotronixContract = connectContract();
   
+        if (chemotronixContract) {
+          let deposit = ethers.utils.parseEther(refund);
+          let eventDateAndTime = new Date(`${eventDate} ${eventTime}`);
+          let eventTimestamp = eventDateAndTime.getTime();
+          let eventDataCID = cid;
+  
+          const txn = await chemotronixContract.createNewEvent(
+            eventTimestamp,
+            deposit,
+            maxCapacity,
+            eventDataCID,
+            { gasLimit: 900000 }
+          );
+  
+          setLoading(true);
+          console.log("Minting...", txn.hash);
+          let wait = await txn.wait();
+          console.log("Minted -- ", txn.hash);
+  
+          setEventID(wait.events[0].args[0]);
+          setSuccess(true);
+          setLoading(false);
+          setMessage("Your event has been created successfully.");
+        } else {
+          console.log("Error getting contract.");
+        }
+      } catch (error) {
+        setSuccess(false);
+        setMessage(`There was an error creating your event: ${error.message}`);
+        setLoading(false);
+        console.log(error);
+      }
+    }
+
+
+
+ 
   }
 
   return (
@@ -49,33 +122,37 @@ const BuyToken = () => {
                   <h1 className="text-4xl md:text-6xl font-bold">How would you like to buy</h1>
               </div>
 
-              <div className="w-full relative">
-                <input type="number" placeholder="Enter amount" className="bg-green-100 pl-36 w-full border-2 border-green-300 cursor-pointer rounded-lg px-8 py-6 flex  justify-center items-center"/>
-                <div className="absolute top-3 left-10 flex  items-center cursor-pointer" onClick={toggleBuying}>
-                    <p className="font-bold">{buying}</p>
-                    <RiIcons.RiArrowDropDownLine className="text-6xl"/>
-                </div>
-                {
-                  showBuying &&(
-                    <div className="absolute top-[90px] w-44 z-10">
-                        <div className="bg-slate-50 w-full border-2 cursor-pointer py-6 border-slate-50 border-t-green-800">
-                          <ul className="flex flex-col w-full justify-center items-center">
-                            <li className=" py-3 hover:bg-slate-300 w-full text-center" onClick={()=>changeBuying('Co2E')}>
-                              <p>Co2E</p> 
-                            </li>
-                            <li className=" py-3 hover:bg-slate-300 w-full text-center" onClick={()=>changeBuying('USDT')}>
-                              <p>USDT</p>
-                            </li>
-                          </ul>
-                        </div>
-                    </div>                          
-                  )
-                  
-                }
-              </div>
-              <div className="bg-green-800 h-16 mt-10 rounded-md cursor-pointer px-12 flex items-center">
-                <p className=" text-white">Proceed with purchase</p>
-              </div>
+                <form onSubmit={handleSubmit} className='w-full flex flex-col items-center'>
+                  <div className="w-full relative">
+                    <input type="number" id="transferAmount" onChange={(e) => setTransferAmount(e.target.value)} value={transferAmount} placeholder="Enter amount" className="bg-green-100 pl-36 w-full border-2 border-green-300 cursor-pointer rounded-lg px-8 py-6 flex  justify-center items-center"/>
+                    <div className="absolute top-3 left-10 flex  items-center cursor-pointer" onClick={toggleBuying}>
+                        <p className="font-bold">{buying}</p>
+                        <RiIcons.RiArrowDropDownLine className="text-6xl"/>
+                    </div>
+
+                      {
+                        showBuying &&(
+                          <div className="absolute top-[90px] w-44 z-10">
+                              <div className="bg-slate-50 w-full border-2 cursor-pointer py-6 border-slate-50 border-t-green-800">
+                                <ul className="flex flex-col w-full justify-center items-center">
+                                  <li className=" py-3 hover:bg-slate-300 w-full text-center" onClick={()=>changeBuying('Co2E')}>
+                                    <p>Co2E</p> 
+                                  </li>
+                                  <li className=" py-3 hover:bg-slate-300 w-full text-center" onClick={()=>changeBuying('USDT')}>
+                                    <p>USDT</p>
+                                  </li>
+                                </ul>
+                              </div>
+                          </div>                          
+                        )
+                        
+                      }
+                  </div>
+                  <button type="submit" className=" text-white bg-green-800 flex justify-center w-4/6 h-16 mt-10 rounded-md cursor-pointer px-12 flex items-center">
+                    Proceed with purchase
+                  </button>
+                 
+                </form>
             </div>
           </div>
         </div>

@@ -1,38 +1,35 @@
-import {
-  chain,
-  WagmiConfig,
-  createClient,
-  configureChains,
-} from 'wagmi'
-import{ alchemyProvider } from 'wagmi/providers/alchemy'
-import DefaultLayout from '../layouts/DefaultLayout';
-import "../styles/globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider, lightTheme } from "@rainbow-me/rainbowkit";
-import '@rainbow-me/rainbowkit/styles.css';
+import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { infuraProvider } from "wagmi/providers/infura";
+import { publicProvider } from "wagmi/providers/public";
+import { ApolloProvider } from "@apollo/client";
+import client from "../apollo-client";
+import "../styles/globals.css";
 
-const { chains, provider} = configureChains(
-  [chain.mainnet, chain.polygon],  
-  [alchemyProvider({alchemyId: process.env.ALCHEMY_ID})]
-)
+const infuraId = process.env.NEXT_PUBLIC_INFURA_ID;
+
+const { chains, provider } = configureChains(
+  [chain.polygonMumbai],
+  [infuraProvider({ infuraId }), publicProvider()]
+);
 
 const { connectors } = getDefaultWallets({
   appName: "chemotronix",
   chains,
-}); 
-
+});
 
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
   provider,
-})
+});
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }) {
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider 
-      chains={chains}
-      theme={lightTheme({
+      <RainbowKitProvider chains={chains}
+        theme={lightTheme({
         accentColor: '#008036',
         accentColorForeground: 'white',
         borderRadius: 'small',
@@ -40,12 +37,10 @@ function MyApp({ Component, pageProps }) {
         overlayBlur: 'small',
       })}
       >
-        <DefaultLayout>
-          <Component {...pageProps} />
-        </DefaultLayout>
+        <ApolloProvider client={client}>
+            <Component {...pageProps} />
+        </ApolloProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );
 }
-
-export default MyApp

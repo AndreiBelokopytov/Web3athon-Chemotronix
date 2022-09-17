@@ -18,6 +18,7 @@ export default function Home() {
         <link rel="icon" href="/logo.png" />
       </Head>
 
+      <DefaultLayout>
       <main
         className="overflow-x-hidden bg-transparent text-black"
         data-theme="emerald"
@@ -28,6 +29,7 @@ export default function Home() {
           <TeamSection />
           <ContactSection />
       </main>
+      </DefaultLayout>
     </div>
   );
 }
