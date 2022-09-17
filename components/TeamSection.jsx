@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import React from "react";
 import LetterCircle from "./LetterCircle";
 import { motion } from "framer-motion";
-function TeamSection() {
+function TeamSection({ teamRef }) {
   const [details, setDetails] = React.useState(
     <AnimatePresence>
       <motion.span exit={{ opacity: 0 }}>
@@ -10,30 +10,14 @@ function TeamSection() {
       </motion.span>
     </AnimatePresence>
   );
-  const teamMemberDetails = [
-    <motion.span exit={{ opacity: 0 }}>
-      Scroll over your cursor on later to see the magic!
-    </motion.span>,
-    <span>
-      <span className="text-3xl font-[400]">Peace Bello,</span>
-      <br />
-      <span className="text-lg font-[400]">
-        Team lead,
-        <br />
-        Data Science Enthusiast
-      </span>
-    </span>,
-  ];
-
-  console.log(teamMemberDetails);
 
   return (
-    <div className="min-h-[50vh] pt-20 pb-20">
+    <div className="min-h-[50vh] pt-20 pb-20" ref={teamRef} id="#team">
       <div className="flex items-center  justify-center my-auto">
         <div className="flex items-center flex-wrap w-[80%] mx-auto justify-between mt-auto">
           <div className=" max-w-lg transition-all duration-500">
             <h2 className="text-6xl font-bold">Our Team</h2>
-            <p className="text-[25px]">{details}</p>
+            <p className="text-[25px] lg:w-[400px]">{details}</p>
           </div>
           <div className="flex flex-wrap max-w-xl">
             <LetterCircle

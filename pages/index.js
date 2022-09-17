@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useRef } from "react";
 import ContactSection from "../components/ContactSection";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
@@ -10,6 +11,12 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const aboutRef = useRef();
+  const teamRef = useRef();
+
+  const refScroll = (e) => {
+    e?.current?.scrollIntoView();
+  };
   return (
     <div>
       <Head>
@@ -25,8 +32,8 @@ export default function Home() {
       >
           <Hero />
           <QuoteSection />
-          <ThirdSection />
-          <TeamSection />
+          <ThirdSection aboutRef={aboutRef} />
+          <TeamSection teamRef={teamRef} />
           <ContactSection />
       </main>
       </DefaultLayout>

@@ -1,13 +1,12 @@
 import Head from "next/head";
 import Navbar from "../components/Navbar";
-import style from '../styles/signedIn.module.css';
-import * as RiIcons from 'react-icons/ri';
+import style from "../styles/signedIn.module.css";
+import * as RiIcons from "react-icons/ri";
 import { useState } from "react";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 import Link from "next/link";
 import { ethers } from "ethers";
 import connectContract from "../utils/connectContract";
-
 
 const BuyToken = () => {
   const [showBuying, setShowBuying] = useState(false)
@@ -16,8 +15,8 @@ const BuyToken = () => {
 
   const toggleBuying = () => {
     setShowBuying(!showBuying);
-  }
-  const changeBuying= (e) => {
+  };
+  const changeBuying = (e) => {
     setBuying(e);
     setShowBuying(!showBuying)
   }
@@ -50,46 +49,8 @@ const BuyToken = () => {
       );
     }
 
-    const createEvent = async (cid) => {
-      try {
-        const chemotronixContract = connectContract();
-  
-        if (chemotronixContract) {
-          let deposit = ethers.utils.parseEther(refund);
-          let eventDateAndTime = new Date(`${eventDate} ${eventTime}`);
-          let eventTimestamp = eventDateAndTime.getTime();
-          let eventDataCID = cid;
-  
-          const txn = await chemotronixContract.createNewEvent(
-            eventTimestamp,
-            deposit,
-            maxCapacity,
-            eventDataCID,
-            { gasLimit: 900000 }
-          );
-  
-          setLoading(true);
-          console.log("Minting...", txn.hash);
-          let wait = await txn.wait();
-          console.log("Minted -- ", txn.hash);
-  
-          setEventID(wait.events[0].args[0]);
-          setSuccess(true);
-          setLoading(false);
-          setMessage("Your event has been created successfully.");
-        } else {
-          console.log("Error getting contract.");
-        }
-      } catch (error) {
-        setSuccess(false);
-        setMessage(`There was an error creating your event: ${error.message}`);
-        setLoading(false);
-        console.log(error);
-      }
-    }
 
-
-
+    setShowBuying(!showBuying);
  
   }
 
@@ -104,24 +65,24 @@ const BuyToken = () => {
       <div className={style.bg}></div>
       <main className="flex justify-center ">
         <div className="container px-5">
-          <Navbar/>
+          <Navbar />
 
           <div className="mt-24 w-full flex justify-start">
-          <Link href={"/signedIn"}>
-            <div className="bg-green-800 h-16 rounded-md cursor-pointer px-12 flex items-center">
-              <p className=" text-white">Back</p>
-            </div>
-          </Link>
+            <Link href={"/signedIn"}>
+              <div className="bg-green-800 h-16 rounded-md cursor-pointer px-12 flex items-center">
+                <p className=" text-white">Back</p>
+              </div>
+            </Link>
           </div>
 
-          
           <div className="mt-16 w-full flex justify-center">
             <div className="flex flex-col items-center w-full md:w-1/2">
               <div className="flex flex-col justify-center mb-7">
-                  <p>buy carbon credit</p>
-                  <h1 className="text-4xl md:text-6xl font-bold">How would you like to buy</h1>
+                <p>buy carbon credit</p>
+                <h1 className="text-4xl md:text-6xl font-bold">
+                  How would you like to buy
+                </h1>
               </div>
-
                 <form onSubmit={handleSubmit} className='w-full flex flex-col items-center'>
                   <div className="w-full relative">
                     <input type="number" id="transferAmount" onChange={(e) => setTransferAmount(e.target.value)} value={transferAmount} placeholder="Enter amount" className="bg-green-100 pl-36 w-full border-2 border-green-300 cursor-pointer rounded-lg px-8 py-6 flex  justify-center items-center"/>
@@ -153,20 +114,21 @@ const BuyToken = () => {
                   </button>
                  
                 </form>
+
+             
             </div>
           </div>
         </div>
       </main>
-      
+
       <div className="flex flex-col items-center relative">
         <div className="container">
           <Footer></Footer>
         </div>
         <div className="bg-[#E9F4FB] h-24 w-full bottom-0 absolute z-[-1]"></div>
       </div>
-        
     </div>
-  )
-}
+  );
+};
 
-export default BuyToken
+export default BuyToken;

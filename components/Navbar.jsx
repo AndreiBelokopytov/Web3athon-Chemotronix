@@ -32,7 +32,10 @@ function Navbar() {
               </svg>
             </a>
             <ul className="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40 w-[164px]">
-              <li className="active:!bg-primary">
+              <li
+                
+                className="active:!bg-primary"
+              >
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -55,7 +58,10 @@ function Navbar() {
               </svg>
             </a>
             <ul className="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40">
-              <li className="active:!bg-primary">
+              <li
+                
+                className="active:!bg-primary"
+              >
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -78,7 +84,10 @@ function Navbar() {
               </svg>
             </a>
             <ul className="py-2 px-1 border-t-2 border-primary bg-[#DCFFEB] z-40 w-[108px]">
-              <li className="active:!bg-primary">
+              <li
+                
+                className="active:!bg-primary"
+              >
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -86,8 +95,10 @@ function Navbar() {
               </li>
             </ul>
           </li>
-          <li className="active:!bg-primary">
-            <a href="#" className="font-[400] text-[#01431D] text-lg">
+          <li
+            className="active:!bg-primary"
+          >
+            <a href="#team" className="font-[400] text-[#01431D] text-lg">
               Team
             </a>
           </li>
@@ -162,7 +173,10 @@ function Navbar() {
               className="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40 "
               style={{ position: "initial" }}
             >
-              <li className="active:!bg-primary">
+              <li
+                
+                className="active:!bg-primary"
+              >
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -188,7 +202,10 @@ function Navbar() {
               className="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40 "
               style={{ position: "initial" }}
             >
-              <li className="active:!bg-primary">
+              <li
+                
+                className="active:!bg-primary"
+              >
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -214,7 +231,10 @@ function Navbar() {
               className="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40 "
               style={{ position: "initial" }}
             >
-              <li className="active:!bg-primary">
+              <li
+                
+                className="active:!bg-primary"
+              >
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -222,7 +242,7 @@ function Navbar() {
               </li>
             </ul>
           </li>
-          <li className="active:!bg-primary">
+          <li className="active:!bg-primary" >
             <a
               href="#"
               className="font-[400] text-[#01431D] text-lg border-[#99F5C0] border-b-2"
