@@ -15,13 +15,20 @@ import axios from "axios";
 import { BASE_URL, Subscribed, SubscriptionCheck } from "../utils/global";
 import { useRouter } from "next/router";
 import connectContract from "../utils/connectContract";
+import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
+// import client from "../apollo-client";
 
-export default function SignedIn() {
+
+ function SignedIn({data}) {
+
   useEffect(() => {
+    
     if (SubscriptionCheck() == true) {
       setIsSubscribed(true);
     }
   }, [SubscriptionCheck]);
+
+  console.log(data)
 
   const account = useAccount().address;
   const { disconnect } = useDisconnect();
@@ -361,3 +368,59 @@ export default function SignedIn() {
     )
   );
 }
+
+export default SignedIn;
+
+export async function getStaticProps() {
+  
+  // const client = new ApolloClient({
+  //   uri: 'https://www.graphqlbin.com/v2/new',
+  //   cache: new InMemoryCache()
+  // })
+
+  // const {data} = await client.query({
+  //   query: gql `
+  //     query GetLaunches {
+  //       launchesPast(limit: 10) {
+  //         mission_name
+  //         launch_date_local
+  //         launch_site {
+  //           site_name_long
+  //         }
+  //         links {
+  //           article_link
+  //           video_link
+  //         }
+  //         rocket {
+  //           rocket_name
+  //         }
+  //       }
+  //     }
+  //   `
+  // })
+
+  const client = new ApolloClient({
+    uri: 'https://api.thegraph.com/subgraphs/name/dear-ore/chemotronix',
+    cache: new InMemoryCache()
+  })
+
+
+  const {data} = await client.query({
+    query: gql `
+      query registers {
+        id
+        subStatus
+        uniqueID
+      }
+    `
+  })
+
+  console.log(data)
+
+  return {
+    props: {
+      data: data
+    },
+  };
+}
+
