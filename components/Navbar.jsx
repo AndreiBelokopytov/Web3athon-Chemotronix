@@ -3,6 +3,7 @@ import Image from "next/image";
 import Logo from "../images/logo.png";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 function Navbar() {
   const router = useRouter();
@@ -10,9 +11,10 @@ function Navbar() {
   return (
     <div>
       <div className="lg:flex items-center justify-between navbar py-2 ">
-        <Image
-          src={Logo}
+        <motion.img
+          src={Logo.src}
           style={{ zIndex: 40 }}
+          layoutId="main-image"
           onClick={() => router.push("/")}
         />
 
@@ -32,10 +34,7 @@ function Navbar() {
               </svg>
             </a>
             <ul className="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40 w-[164px]">
-              <li
-                
-                className="active:!bg-primary"
-              >
+              <li className="active:!bg-primary">
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -58,10 +57,7 @@ function Navbar() {
               </svg>
             </a>
             <ul className="py-2 px-4 border-t-2 border-primary bg-[#DCFFEB] z-40">
-              <li
-                
-                className="active:!bg-primary"
-              >
+              <li className="active:!bg-primary">
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -84,10 +80,7 @@ function Navbar() {
               </svg>
             </a>
             <ul className="py-2 px-1 border-t-2 border-primary bg-[#DCFFEB] z-40 w-[108px]">
-              <li
-                
-                className="active:!bg-primary"
-              >
+              <li className="active:!bg-primary">
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -95,9 +88,7 @@ function Navbar() {
               </li>
             </ul>
           </li>
-          <li
-            className="active:!bg-primary"
-          >
+          <li className="active:!bg-primary">
             <a href="#team" className="font-[400] text-[#01431D] text-lg">
               Team
             </a>
@@ -173,10 +164,7 @@ function Navbar() {
               className="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40 "
               style={{ position: "initial" }}
             >
-              <li
-                
-                className="active:!bg-primary"
-              >
+              <li className="active:!bg-primary">
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -202,10 +190,7 @@ function Navbar() {
               className="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40 "
               style={{ position: "initial" }}
             >
-              <li
-                
-                className="active:!bg-primary"
-              >
+              <li className="active:!bg-primary">
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -231,10 +216,7 @@ function Navbar() {
               className="py-2  border-t-2 border-primary bg-[#DCFFEB] z-40 "
               style={{ position: "initial" }}
             >
-              <li
-                
-                className="active:!bg-primary"
-              >
+              <li className="active:!bg-primary">
                 <a>About us</a>
               </li>
               <li className="active:!bg-primary">
@@ -242,7 +224,7 @@ function Navbar() {
               </li>
             </ul>
           </li>
-          <li className="active:!bg-primary" >
+          <li className="active:!bg-primary">
             <a
               href="#"
               className="font-[400] text-[#01431D] text-lg border-[#99F5C0] border-b-2"

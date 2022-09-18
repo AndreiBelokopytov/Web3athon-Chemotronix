@@ -5,11 +5,15 @@ import * as RiIcons from "react-icons/ri";
 import { useState } from "react";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import connectContract from "../utils/connectContract";
+import { toast } from "react-toastify";
 
 const SendToken = () => {
   const [showBuying, setShowBuying] = useState(false);
   const [buying, setBuying] = useState("Co2E");
-
+  const [recieverAddress, setRecieverAddress] = useState("");
+  const [amount, setAmount] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const toggleBuying = () => {
     setShowBuying(!showBuying);
   };
@@ -17,6 +21,56 @@ const SendToken = () => {
     setBuying(e);
     setShowBuying(!showBuying);
   };
+  const clear = () => {
+    setRecieverAddress("");
+    setAmount("");
+  };
+  const Transfer = async () => {
+    setIsLoading(true);
+    try {
+      const chemContract = connectContract();
+
+      if (chemContract) {
+        // let eventDataCID = cid;
+
+        const txn = await chemContract.transfer(recieverAddress, amount);
+        console.log("Minting...", txn.hash);
+        console.log("Minted -- ", txn);
+        setIsLoading(false);
+        clear();
+        toast.success("Token sent");
+      } else {
+        console.log("Error getting contract.");
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error, "err");
+    }
+  };
+  const body = {
+    recieverAddress: recieverAddress,
+    amount: amount,
+  };
+
+  // try {
+  //   const response = await fetch("/api/store-event-data", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(body),
+  //   });
+  //   if (response.status !== 200) {
+  //     alert("Oops! Something went wrong. Please refresh and try again.");
+  //   } else {
+  //     console.log("Form successfully submitted!");
+  //     let responseJSON = await response.json();
+  //     await createEvent(responseJSON.cid);
+  //   }
+  //   // check response, if success is false, dont take them to success page
+  // } catch (error) {
+  //   alert(
+  //     `Oops! Something went wrong. Please refresh and try again. Error ${error}`
+  //   );
+  // }
 
   return (
     <div>
@@ -53,6 +107,8 @@ const SendToken = () => {
                   type="number"
                   placeholder="Enter amount"
                   className="bg-green-100 pl-36 w-full border-2 border-green-300 cursor-pointer rounded-lg px-8 py-6 flex  justify-center items-center"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
                 />
                 <div
                   className="absolute top-3 left-10 flex  items-center cursor-pointer"
@@ -86,9 +142,13 @@ const SendToken = () => {
                 type="text"
                 placeholder="Enter wallet address"
                 className="bg-green-100 mt-5 w-full border-2 border-green-300 cursor-pointer rounded-lg px-8 py-6 flex  justify-center items-center"
+                onChange={(e) => setRecieverAddress(e.target.value)}
+                value={recieverAddress}
               />
               <div className="bg-green-800 h-16 mt-10 rounded-md cursor-pointer px-12 flex items-center">
-                <p className=" text-white">Proceed with transfer</p>
+                <p className=" text-white" onClick={() => Transfer()}>
+                  {isLoading ? "Loading..." : "Proceed with transfer"}
+                </p>
               </div>
             </div>
           </div>

@@ -7,11 +7,13 @@ import Footer from "../components/Footer";
 import Link from "next/link";
 import { ethers } from "ethers";
 import connectContract from "../utils/connectContract";
+import { toast } from "react-toastify";
 
 const BuyToken = () => {
   const [showBuying, setShowBuying] = useState(false);
   const [buying, setBuying] = useState("Co2E");
   const [transferAmount, setTransferAmount] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleBuying = () => {
     setShowBuying(!showBuying);
@@ -32,11 +34,14 @@ const BuyToken = () => {
         });
         console.log("Minting...", txn.hash);
         console.log("Minted -- ", txn.hash);
+        toast.success("Token Purchased");
       } else {
         console.log("Error getting contract.");
+        toast.error("Error getting contract.");
       }
     } catch (error) {
       console.log(error, "err");
+      toast.success("Token Purchase failed");
     }
   };
   async function handleSubmit(e) {
@@ -142,9 +147,10 @@ const BuyToken = () => {
                 </div>
                 <button
                   type="submit"
+                  disabled={isLoading}
                   className=" text-white bg-green-800 flex justify-center w-4/6 h-16 mt-10 rounded-md cursor-pointer px-12 flex items-center"
                 >
-                  Proceed with purchase
+                  {isLoading ? "Purchasing" : "Proceed with purchase"}
                 </button>
               </form>
             </div>

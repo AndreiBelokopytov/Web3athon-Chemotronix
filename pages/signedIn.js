@@ -12,11 +12,17 @@ import { useAccount, useDisconnect } from "wagmi";
 import Wmenu from "../components/Wmenu";
 import { ethers } from "ethers";
 import axios from "axios";
-import { BASE_URL } from "../utils/global";
+import { BASE_URL, Subscribed, SubscriptionCheck } from "../utils/global";
 import { useRouter } from "next/router";
 import connectContract from "../utils/connectContract";
 
 export default function SignedIn() {
+  useEffect(() => {
+    if (SubscriptionCheck() == true) {
+      setIsSubscribed(true);
+    }
+  }, [SubscriptionCheck]);
+
   const account = useAccount().address;
   const { disconnect } = useDisconnect();
   // console.log(useAccount())
@@ -29,6 +35,7 @@ export default function SignedIn() {
   const [sub, setSub] = useState(false);
   const [iot, setIot] = useState();
   const [deposit, setDeposit] = useState();
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const openSubcribe = () => {
     setSub(!sub);
@@ -43,6 +50,8 @@ export default function SignedIn() {
         const txn = await rsvpContract.subscribe(deposit, eventDataCID);
         console.log("Minting...", txn.hash);
         console.log("Minted -- ", txn.hash);
+        Subscribed();
+        setIsSubscribed(true);
       } else {
         console.log("Error getting contract.");
       }
@@ -197,7 +206,7 @@ export default function SignedIn() {
                         <form className="space-y-6" onSubmit={handleSubscribe}>
                           <div>
                             <input
-                              type="number"
+                              type="text"
                               name="ioT"
                               onChange={(e) => setIot(e.target.value)}
                               id="ioT"
@@ -249,8 +258,9 @@ export default function SignedIn() {
                         <div
                           className="bg-[#008036] cursor-pointer ml-4 px-3 py-1 rounded-md text-white"
                           onClick={openSubcribe}
+                          disabled={isSubscribed}
                         >
-                          Subscribe
+                          {isSubscribed ? "Subscribed" : "Subscribe"}
                         </div>
                       </div>
                     ) : (
