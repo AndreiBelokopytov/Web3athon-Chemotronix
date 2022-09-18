@@ -327,33 +327,35 @@ function SignedIn() {
                   </div>
                 </div>
                 <div className="lg:w-1/2 lg:flex lg:justify-end items-center">
-                  <div className=" relative w-auto">
-                    <div
-                      className="bg-slate-50 border-4 cursor-pointer border-green-200 rounded-lg px-8 py-2 flex  justify-center items-center"
-                      onClick={toggleBuyCarbon}
-                    >
-                      <p className="mr-4">Buy carbon credit</p>
-                      <RiIcons.RiArrowDropDownLine className="text-6xl" />
-                    </div>
-                    {buyCarbon && (
-                      <div className="absolute top-[90px] w-full">
-                        <div className="bg-slate-50 w-full border-2 cursor-pointer py-6 border-slate-50 border-t-green-800">
-                          <ul className="flex flex-col w-full justify-center items-center">
-                            <Link href={"/sendToken"}>
-                              <li className=" py-3 hover:bg-slate-300 w-full text-center">
-                                Send Token
-                              </li>
-                            </Link>
-                            <Link href={"/buyToken"}>
-                              <li className=" py-3 hover:bg-slate-300 w-full text-center">
-                                Buy carbon credit
-                              </li>
-                            </Link>
-                          </ul>
-                        </div>
+                  {account && (
+                    <div className=" relative w-auto">
+                      <div
+                        className="bg-slate-50 border-4 cursor-pointer border-green-200 rounded-lg px-8 py-2 flex  justify-center items-center"
+                        onClick={toggleBuyCarbon}
+                      >
+                        <p className="mr-4">Buy carbon credit</p>
+                        <RiIcons.RiArrowDropDownLine className="text-6xl" />
                       </div>
-                    )}
-                  </div>
+                      {buyCarbon && (
+                        <div className="absolute top-[90px] w-full">
+                          <div className="bg-slate-50 w-full border-2 cursor-pointer py-6 border-slate-50 border-t-green-800">
+                            <ul className="flex flex-col w-full justify-center items-center">
+                              <Link href={"/sendToken"}>
+                                <li className=" py-3 hover:bg-slate-300 w-full text-center">
+                                  Send Token
+                                </li>
+                              </Link>
+                              <Link href={"/buyToken"}>
+                                <li className=" py-3 hover:bg-slate-300 w-full text-center">
+                                  Buy carbon credit
+                                </li>
+                              </Link>
+                            </ul>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
