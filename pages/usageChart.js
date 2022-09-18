@@ -34,9 +34,9 @@ function usageChart() {
     <div className="py-3">
       <h2 className="flex  justify-center text-[25px] mb-20">Usgae Charts</h2>
       <div className="grid xl:grid-cols-3  px-5 bg-cus lg:grid-cols-2 grid-cols-1 gap-6 mx-auto">
-        {visuals.map((chart) => {
+        {visuals.map((chart,i) => {
           return (
-            <div className="rounded-lg shadow-lg  w-fit">
+            <div key={i} className="rounded-lg shadow-lg  w-fit">
               <iframe
                 src={chart}
                 frameBorder="1"
