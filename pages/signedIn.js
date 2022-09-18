@@ -16,19 +16,17 @@ import { BASE_URL, Subscribed, SubscriptionCheck } from "../utils/global";
 import { useRouter } from "next/router";
 import connectContract from "../utils/connectContract";
 import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
+import ColoredCard from "../components/ColoredCard";
 // import client from "../apollo-client";
 
-
- function SignedIn({data}) {
-
+function SignedIn() {
   useEffect(() => {
-    
     if (SubscriptionCheck() == true) {
       setIsSubscribed(true);
     }
   }, [SubscriptionCheck]);
 
-  console.log(data)
+  // console.log(data);
 
   const account = useAccount().address;
   const { disconnect } = useDisconnect();
@@ -43,10 +41,39 @@ import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
   const [iot, setIot] = useState();
   const [deposit, setDeposit] = useState();
   const [isSubscribed, setIsSubscribed] = useState(false);
-
+  const [dataGraph, setDataGraph] = useState(null);
+  const [graphAddress, setGraphAddress] = useState(account);
   const openSubcribe = () => {
     setSub(!sub);
   };
+  const client = new ApolloClient({
+    uri: "https://api.thegraph.com/subgraphs/name/dear-ore/chemotronix",
+    cache: new InMemoryCache(),
+  });
+  console.log(account);
+  useEffect(() => {
+    client
+      .query({
+        query: gql`
+          {
+            registers {
+              id
+              subStatus
+              uniqueID
+              registrationTime
+            }
+          }
+        `,
+      })
+      .then((res) => {
+        console.log(res);
+        setDataGraph(res.data.registers);
+      })
+      .catch((err) => {
+        console.log(err, "err");
+      });
+  }, [account]);
+
   const createEvent = async (cid) => {
     try {
       const rsvpContract = connectContract();
@@ -293,10 +320,7 @@ import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
             <div className="mt-14">
               <div className="container flex flex-col lg:flex-row justify-center">
                 <div className="lg:w-1/2 flex flex-col">
-                  <div className="flex">
-                    <p className=" text-green-800 mr-3">Wallet Balance:</p>
-                    <p className=" text-green-800 font-bold"> 0 Co2E</p>
-                  </div>
+                  <div className="flex"></div>
                   <div className="flex my-5 flex-wrap">
                     <p className=" text-green-800 mr-3 ">Wallet Address :</p>
                     <p className=" text-green-800 font-bold"> {account}</p>
@@ -335,15 +359,35 @@ import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
             </div>
 
             <div className="mt-10">
-              <p className=" text-green-800">Credit Usage:</p>
               <div className="bg-green-200 mt-4 h-32 rounded-xl flex justify-around items-center">
-                <p className=" text-green-800">Amount used</p>
-                <p className=" text-green-800">Time</p>
-                <p className=" text-green-800">Balance</p>
+                <p className=" text-green-800">Registration Time</p>
+                <p className=" text-green-800">Subscription Status</p>
+                <p className=" text-green-800">Unique ID</p>
               </div>
+              {dataGraph && (
+                <div className="mt-10 ml-7">
+                  <div className="bg-white mt-4 h-32 rounded-xl flex justify-around items-center">
+                    <p className=" text-green-800">
+                      <ColoredCard
+                        text={dataGraph[dataGraph.length - 1].registrationTime}
+                      />
+                    </p>
+                    <p className=" text-green-800">
+                      <ColoredCard
+                        text={dataGraph[dataGraph.length - 1]?.subStatus}
+                      />
+                    </p>
+                    <p className=" text-green-800">
+                      <ColoredCard
+                        text={dataGraph[dataGraph.length - 1].uniqueID}
+                      />
+                    </p>
+                  </div>
+                </div>
+              )}
 
               <div className="mt-20">
-                {!showUsage && (
+                {dataGraph == null && (
                   <div className=" h-auto border-dashed rounded-lg border-2 px-3 border-slate-300">
                     <div className=" flex  flex-col w-100 items-center justify-around ">
                       <Image src={empty} height={450} width={450} />
@@ -371,56 +415,53 @@ import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
 
 export default SignedIn;
 
-export async function getStaticProps() {
-  
-  // const client = new ApolloClient({
-  //   uri: 'https://www.graphqlbin.com/v2/new',
-  //   cache: new InMemoryCache()
-  // })
+// export async function getStaticProps() {
+//   // const client = new ApolloClient({
+//   //   uri: 'https://www.graphqlbin.com/v2/new',
+//   //   cache: new InMemoryCache()
+//   // })
 
-  // const {data} = await client.query({
-  //   query: gql `
-  //     query GetLaunches {
-  //       launchesPast(limit: 10) {
-  //         mission_name
-  //         launch_date_local
-  //         launch_site {
-  //           site_name_long
-  //         }
-  //         links {
-  //           article_link
-  //           video_link
-  //         }
-  //         rocket {
-  //           rocket_name
-  //         }
-  //       }
-  //     }
-  //   `
-  // })
+//   // const {data} = await client.query({
+//   //   query: gql `
+//   //     query GetLaunches {
+//   //       launchesPast(limit: 10) {
+//   //         mission_name
+//   //         launch_date_local
+//   //         launch_site {
+//   //           site_name_long
+//   //         }
+//   //         links {
+//   //           article_link
+//   //           video_link
+//   //         }
+//   //         rocket {
+//   //           rocket_name
+//   //         }
+//   //       }
+//   //     }
+//   //   `
+//   // })
 
-  const client = new ApolloClient({
-    uri: 'https://api.thegraph.com/subgraphs/name/dear-ore/chemotronix',
-    cache: new InMemoryCache()
-  })
+//   // const client = new ApolloClient({
+//   //   uri: "https://api.thegraph.com/subgraphs/name/dear-ore/chemotronix",
+//   //   cache: new InMemoryCache(),
+//   // });
 
+//   // const { data } = await client.query({
+//   //   query: gql`
+//   //      query registers[] {
+//   //       id
+//   //       subStatus
+//   //       uniqueID
+//   //     }
+//   //   `,
+//   // });
 
-  const {data} = await client.query({
-    query: gql `
-      query registers {
-        id
-        subStatus
-        uniqueID
-      }
-    `
-  })
+//   // console.log(data)
 
-  console.log(data)
-
-  return {
-    props: {
-      data: data
-    },
-  };
-}
-
+//   // return {
+//   //   props: {
+//   //     data: data,
+//   //   },
+//   // };
+// }
