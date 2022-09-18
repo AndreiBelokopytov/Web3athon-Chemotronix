@@ -42,7 +42,9 @@ function SignedIn() {
   const [deposit, setDeposit] = useState();
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [dataGraph, setDataGraph] = useState(null);
+  const [filtered, setFiltered] = useState(null);
   const [graphAddress, setGraphAddress] = useState(account);
+
   const openSubcribe = () => {
     setSub(!sub);
   };
@@ -50,7 +52,7 @@ function SignedIn() {
     uri: "https://api.thegraph.com/subgraphs/name/dear-ore/chemotronix",
     cache: new InMemoryCache(),
   });
-  console.log(account);
+  
   useEffect(() => {
     client
       .query({
@@ -66,20 +68,28 @@ function SignedIn() {
         `,
       })
       .then((res) => {
-        console.log(res);
-        setDataGraph(res.data.registers);
+       
+       
+          function check(obb) {
+            
+            return obb.id == account.toLowerCase();
+          }
+          const data = res.data.registers;
+          setDataGraph(data.filter(check));
+       console.log(data.filter(check),account)
+       
       })
       .catch((err) => {
         console.log(err, "err");
       });
   }, [account]);
 
-  const createEvent = async (cid) => {
+  const createEvent = async (uniqueID) => {
     try {
       const rsvpContract = connectContract();
 
       if (rsvpContract) {
-        let eventDataCID = cid;
+        let eventDataCID = uniqueID;
 
         const txn = await rsvpContract.subscribe(deposit, eventDataCID);
         console.log("Minting...", txn.hash);
@@ -101,25 +111,7 @@ function SignedIn() {
       deposit: deposit,
     };
 
-    try {
-      const response = await fetch("/api/store-event-data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      if (response.status !== 200) {
-        alert("Oops! Something went wrong. Please refresh and try again.");
-      } else {
-        console.log("Form successfully submitted!");
-        let responseJSON = await response.json();
-        await createEvent(responseJSON.cid);
-      }
-      // check response, if success is false, dont take them to success page
-    } catch (error) {
-      alert(
-        `Oops! Something went wrong. Please refresh and try again. Error ${error}`
-      );
-    }
+    await createEvent(body.iot);
   }
 
   const toggleBuyCarbon = () => {
@@ -158,30 +150,10 @@ function SignedIn() {
       });
   };
 
-  // useEffect(() => {
-  //   if (cidArray) {
-  //     getUsers();
-  //   }
-  // }, [cidArray]);
 
-  // function getUsers() {
-  //   cidArray.map((e) => {
-  //     return axios
-  //       .get(`https://api.web3.storage/user/uploads/${e}`, config)
-  //       .then((response) => {
-  //         console.log(response, "res");
-  //         newArr.push(response.data.name);
-  //         setUsers([...users, ...newArr]);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   });
-  // }
-  // useEffect(() => {
-  //   console.log(users);
-  // }, [users]);
   const [mounted, setMounted] = useState(false);
+
+  
 
   useEffect(() => {
     setMounted(true);
@@ -366,23 +338,18 @@ function SignedIn() {
                 <p className=" text-green-800">Subscription Status</p>
                 <p className=" text-green-800">Unique ID</p>
               </div>
-              {dataGraph && (
+              {dataGraph !== null && (
+                
                 <div className="mt-10 ml-7">
                   <div className="bg-white mt-4 h-32 rounded-xl flex justify-around items-center">
                     <p className=" text-green-800">
-                      <ColoredCard
-                        text={dataGraph[dataGraph.length - 1].registrationTime}
-                      />
+                      <ColoredCard text={dataGraph[0]?.registrationTime} />
                     </p>
                     <p className=" text-green-800">
-                      <ColoredCard
-                        text={dataGraph[dataGraph.length - 1]?.subStatus}
-                      />
+                      <ColoredCard text={dataGraph[0]?.subStatus} />
                     </p>
                     <p className=" text-green-800">
-                      <ColoredCard
-                        text={dataGraph[dataGraph.length - 1].uniqueID}
-                      />
+                      <ColoredCard text={dataGraph[0]?.uniqueID} />
                     </p>
                   </div>
                 </div>
