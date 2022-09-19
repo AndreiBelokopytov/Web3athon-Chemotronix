@@ -1,0 +1,33 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: chemotronix
+    network: mumbai
+    source:
+      address: "0x4C79F18C96D93C13d9b944Ed13045EAb618C10eF"
+      abi: chemotronix
+      startBlock: 28095042
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Register
+        - TransferCredit
+        - Withdraw
+        - Approve
+      abis:
+        - name: chemotronix
+          file: ./abis/chemotronix.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: fundsWithdrawn(uint256,address)
+          handler: handlefundsWithdrawn
+        - event: registered(string,uint256,address)
+          handler: handleregistered
+      file: ./src/chemotronix.ts

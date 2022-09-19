@@ -1,0 +1,37 @@
+enum subSatus{
+  unregistered,
+  active,
+  expired
+}
+
+
+type Register @entity {
+  id: ID!
+  uniqueID: String
+  companyAddress: Bytes! 
+  registrationTime: BigInt!
+  industryType: String
+  subStatus: String
+}
+
+type TransferCredit @entity {
+  id: ID!
+  uniqueID: String
+  IoTID: String
+  senderAddress: Bytes!
+  receiverAddress: Bytes!
+  amount: BigInt!
+}
+
+type Withdraw @entity {
+  id: ID!
+  admin: Bytes
+  amount: BigInt
+}
+
+type Approve @entity {
+  id: ID!
+  owner: Bytes
+  spender: Bytes
+  amount: BigInt
+}
