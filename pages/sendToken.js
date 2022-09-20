@@ -7,6 +7,11 @@ import Footer from "../components/Footer";
 import Link from "next/link";
 import connectContract from "../utils/connectContract";
 import { toast } from "react-toastify";
+import {
+  BASE_URL,
+  getUniqueId,
+
+} from "../utils/global";
 
 const SendToken = () => {
   const [showBuying, setShowBuying] = useState(false);
@@ -32,8 +37,12 @@ const SendToken = () => {
 
       if (chemContract) {
         // let eventDataCID = cid;
-
-        const txn = await chemContract.transfer(recieverAddress, amount);
+        let uid = getUniqueId();
+        const txn = await chemContract.shareCredit(
+          uid,
+          recieverAddress,
+          amount
+        );
         console.log("Minting...", txn.hash);
         console.log("Minted -- ", txn);
         setIsLoading(false);
@@ -110,11 +119,8 @@ const SendToken = () => {
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                 />
-                <div
-                  className="absolute top-3 left-10 flex  items-center cursor-pointer"
-                  onClick={toggleBuying}
-                >
-                  <p className="font-bold">{buying}</p>
+                <div className="absolute top-3 left-10 flex  items-center cursor-pointer">
+                  <p className="font-bold">CMX</p>
                   <RiIcons.RiArrowDropDownLine className="text-6xl" />
                 </div>
                 {showBuying && (
@@ -140,7 +146,7 @@ const SendToken = () => {
               </div>
               <input
                 type="text"
-                placeholder="Enter wallet address"
+                placeholder="Reciver's Unique Id"
                 className="bg-green-100 mt-5 w-full border-2 border-green-300 cursor-pointer rounded-lg px-8 py-6 flex  justify-center items-center"
                 onChange={(e) => setRecieverAddress(e.target.value)}
                 value={recieverAddress}

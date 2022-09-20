@@ -12,12 +12,19 @@ import { useAccount, useDisconnect } from "wagmi";
 import Wmenu from "../components/Wmenu";
 import { ethers } from "ethers";
 import axios from "axios";
-import { BASE_URL, Subscribed, SubscriptionCheck } from "../utils/global";
+import {
+  BASE_URL,
+  storeUniqueId,
+  Subscribed,
+  SubscriptionCheck,
+} from "../utils/global";
 import { useRouter } from "next/router";
 import connectContract from "../utils/connectContract";
 import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
 import ColoredCard from "../components/ColoredCard";
+import moment from "moment";
 // import client from "../apollo-client";
+import { toast } from "react-toastify";
 
 function SignedIn() {
   useEffect(() => {
@@ -48,11 +55,16 @@ function SignedIn() {
   const openSubcribe = () => {
     setSub(!sub);
   };
+  const convertToDate = (num) => {
+    let newUnix = moment.unix(num);
+    console.log(newUnix.format("llll"));
+    return newUnix.format("llll");
+  };
   const client = new ApolloClient({
     uri: "https://api.thegraph.com/subgraphs/name/dear-ore/chemotronix",
     cache: new InMemoryCache(),
   });
-  
+
   useEffect(() => {
     client
       .query({
@@ -68,16 +80,12 @@ function SignedIn() {
         `,
       })
       .then((res) => {
-       
-       
-          function check(obb) {
-            
-            return obb.id == account.toLowerCase();
-          }
-          const data = res.data.registers;
-          setDataGraph(data.filter(check));
-       console.log(data.filter(check),account)
-       
+        function check(obb) {
+          return obb.id == account.toLowerCase();
+        }
+        const data = res.data.registers;
+        setDataGraph(data.filter(check));
+        console.log(data.filter(check), account);
       })
       .catch((err) => {
         console.log(err, "err");
@@ -86,14 +94,19 @@ function SignedIn() {
 
   const createEvent = async (uniqueID) => {
     try {
-      const rsvpContract = connectContract();
-
-      if (rsvpContract) {
+      const chemContract = connectContract();
+     
+      if (chemContract) {
         let eventDataCID = uniqueID;
 
-        const txn = await rsvpContract.subscribe(deposit, eventDataCID);
+        const txn = await chemContract.subscribe(deposit, eventDataCID, {
+          gasLimit: 900000,
+        });
+
         console.log("Minting...", txn.hash);
         console.log("Minted -- ", txn.hash);
+        storeUniqueId(uniqueID);
+        toast.success("Subscribed");
         Subscribed();
         setIsSubscribed(true);
       } else {
@@ -150,10 +163,7 @@ function SignedIn() {
       });
   };
 
-
   const [mounted, setMounted] = useState(false);
-
-  
 
   useEffect(() => {
     setMounted(true);
@@ -299,7 +309,7 @@ function SignedIn() {
                   </div>
                 </div>
                 <div className="lg:w-1/2 lg:flex lg:justify-end items-center">
-                  {account && (
+                  {account && isSubscribed && (
                     <div className=" relative w-auto">
                       <div
                         className="bg-slate-50 border-4 cursor-pointer border-green-200 rounded-lg px-8 py-2 flex  justify-center items-center"
@@ -339,17 +349,24 @@ function SignedIn() {
                 <p className=" text-green-800">Unique ID</p>
               </div>
               {dataGraph !== null && (
-                
                 <div className="mt-10 ml-7">
                   <div className="bg-white mt-4 h-32 rounded-xl flex justify-around items-center">
                     <p className=" text-green-800">
-                      <ColoredCard text={dataGraph[0]?.registrationTime} />
+                      <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
+                        {convertToDate(dataGraph[0]?.registrationTime)}
+                      </div>
                     </p>
                     <p className=" text-green-800">
-                      <ColoredCard text={dataGraph[0]?.subStatus} />
+                      <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
+                        {dataGraph[0]?.subStatus}
+                      </div>
                     </p>
                     <p className=" text-green-800">
-                      <ColoredCard text={dataGraph[0]?.uniqueID} />
+                      <div className="p-4 shadow  flex text-sm items-center justify-center rounded max-w-[200px] min-h-[60px] bg-yellow-500 text-white break-all">
+                        <span className=" ">
+                          {dataGraph[dataGraph.length - 1]?.uniqueID}
+                        </span>
+                      </div>
                     </p>
                   </div>
                 </div>
