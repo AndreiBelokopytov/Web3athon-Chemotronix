@@ -322,6 +322,11 @@ function SignedIn() {
                                   Buy carbon credit
                                 </li>
                               </Link>
+                              <Link href={"/offsetCarbon"}>
+                                <li className=" py-3 hover:bg-slate-300 w-full text-center">
+                                  Offset carbon
+                                </li>
+                              </Link>
                             </ul>
                           </div>
                         </div>
