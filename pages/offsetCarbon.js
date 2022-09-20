@@ -7,6 +7,11 @@ import Footer from "../components/Footer";
 import Link from "next/link";
 import connectContract from "../utils/connectContract";
 import { toast } from "react-toastify";
+import {
+    BASE_URL,
+    getUniqueId,
+  
+  } from "../utils/global";
 
 const OffsetCarbon = () => {
   const [showBuying, setShowBuying] = useState(false);
@@ -21,15 +26,18 @@ const OffsetCarbon = () => {
   const clear = () => {
     setAmount("");
   };
+
+
   const Offset = async () => {
     setIsLoading(true);
     try {
       const chemContract = connectContract();
 
       if (chemContract) {
+        let uid = getUniqueId();
         // let eventDataCID = cid;
 
-        const txn = await chemContract.offset(amount);
+        const txn = await chemContract.offset( uid, amount);
         console.log("Minting...", txn.hash);
         console.log("Minted -- ", txn);
         setIsLoading(false);
