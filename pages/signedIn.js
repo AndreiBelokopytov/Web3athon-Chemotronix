@@ -10,6 +10,7 @@ import Link from "next/link";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount, useDisconnect } from "wagmi";
 import Wmenu from "../components/Wmenu";
+// import ReadMore from "../components/ReadMore";
 import { ethers } from "ethers";
 import axios from "axios";
 import {
@@ -23,8 +24,8 @@ import connectContract from "../utils/connectContract";
 import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
 import ColoredCard from "../components/ColoredCard";
 import moment from "moment";
-// import client from "../apollo-client";
 import { toast } from "react-toastify";
+import { ReadMore } from "./../components/ReadMore";
 
 function SignedIn() {
   useEffect(() => {
@@ -95,7 +96,7 @@ function SignedIn() {
   const createEvent = async (uniqueID) => {
     try {
       const chemContract = connectContract();
-     
+
       if (chemContract) {
         let eventDataCID = uniqueID;
 
@@ -179,9 +180,9 @@ function SignedIn() {
         </Head>
 
         <div className={style.bg}></div>
-        <main className="flex justify-center ">
+        <main className="flex justify-center overflow-hiddne">
           <div className="container px-5">
-            <Navbar />
+            <Navbar signedIn />
 
             <div className="mt-24">
               {sub && (
@@ -286,7 +287,7 @@ function SignedIn() {
                     <h1 className="text-4xl md:text-6xl font-bold"></h1>
                   </div>
                 </div>
-                <div className="hidden lg:w-1/2 lg:flex lg:justify-end items-center">
+                <div className="lg:mt-0 mt-10 w-[40%] lg:w-1/2 lg:flex lg:justify-end items-center">
                   <div className="bg-green-800 h-16 rounded-md cursor-pointer px-12 flex items-center">
                     <p
                       onClick={() => router.push("/usageChart")}
@@ -305,7 +306,10 @@ function SignedIn() {
                   <div className="flex"></div>
                   <div className="flex my-5 flex-wrap">
                     <p className=" text-green-800 mr-3 ">Wallet Address :</p>
-                    <p className=" text-green-800 font-bold w-[156px] md:w-auto overflow-hidden"> {account} </p>
+                    <p className=" text-green-800 font-bold w-[156px] md:w-auto overflow-hidden">
+                      {" "}
+                      {account}{" "}
+                    </p>
                     <span className="md:hidden">...</span>
                   </div>
                 </div>
@@ -348,29 +352,34 @@ function SignedIn() {
               </div>
             </div>
 
-            <div className="mt-10">
-              <div className="bg-green-200 mt-4 h-32 mb-32 md:mb-0 rounded-xl flex flex-col md:flex-row pl-7  justify-around md:items-center">
-                <p className=" text-green-800">Registration Time</p>
-                <p className=" text-green-800">Subscription Status</p>
-                <p className=" text-green-800">Unique ID</p>
+            <div className="mt-10 md:flex flex-col hidden  justify-between">
+              <div className="bg-green-200 mt-4 h-fit md:h-32 mb-32 md:mb-0 rounded-xl flex flex-col md:flex-row pl-7  justify-around md:items-center">
+                <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px]">
+                  Registration Time
+                </p>
+                <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px]">
+                  Subscription Status
+                </p>
+                <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px]">
+                  Unique ID
+                </p>
               </div>
               {dataGraph !== null && (
-                <div className="mt-10 md:ml-7">
+                <div className="mt-10 md:ml-7 ml-2">
                   <div className="bg-white mt-4 h-32 rounded-xl flex flex-col md:flex-row  justify-around md:items-center">
-
-                    <p className=" text-green-800 mb-7 mg:mb-0 ">
+                    <p className=" text-green-800 mb-7 md:mb-0 ">
                       <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
                         {convertToDate(dataGraph[0]?.registrationTime)}
                       </div>
                     </p>
 
-                    <p className=" text-green-800 mb-7 mg:mb-0">
+                    <p className=" text-green-800 mb-7 md:mb-0">
                       <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
                         {dataGraph[0]?.subStatus}
                       </div>
                     </p>
 
-                    <p className=" text-green-800 mb-7 mg:mb-0">
+                    <p className=" text-green-800 mb-7 md:mb-0">
                       <div className="p-4 shadow  flex text-sm items-center justify-center rounded md:max-w-[200px] min-h-[60px] bg-yellow-500 text-white break-all">
                         <span className=" ">
                           {dataGraph[dataGraph.length - 1]?.uniqueID}
@@ -393,6 +402,52 @@ function SignedIn() {
                   </div>
                 )}
               </div>
+            </div>
+            {dataGraph !== null && (
+              <>
+                <div className="grid md:hidden grid-cols-4 gap-3 mt-10 bg-white p-2 rounded">
+                  <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px] col-span-2">
+                    Registration Time
+                  </p>
+                  <p className=" text-green-800 mb-7 md:mb-0  col-span-2">
+                    <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
+                      {convertToDate(dataGraph[0]?.registrationTime)}
+                    </div>
+                  </p>
+                  <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px] col-span-2">
+                    Subscription Status
+                  </p>
+                  <p className=" text-green-800 mb-7 md:mb-0 col-span-2">
+                    <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
+                      {dataGraph[0]?.subStatus}
+                    </div>
+                  </p>
+                  <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px] col-span-2">
+                    Unique ID
+                  </p>
+                  <p className=" text-green-800 mb-7 md:mb-0 col-span-2">
+                    <div className="p-4 shadow  flex text-sm items-center justify-center rounded md:max-w-[200px] min-h-[60px] bg-yellow-500 text-white break-all">
+                      <span className=" ">
+                        <ReadMore>
+                          {dataGraph[dataGraph.length - 1]?.uniqueID}
+                        </ReadMore>
+                      </span>
+                    </div>
+                  </p>
+                </div>
+              </>
+            )}
+            <div className="mt-20">
+              {dataGraph == null && (
+                <div className=" h-auto border-dashed rounded-lg border-2 px-3 border-slate-300">
+                  <div className=" flex  flex-col w-100 items-center justify-around ">
+                    <Image src={empty} height={450} width={450} />
+                    <p className=" font-extrabold text-slate-500 mt-[-30px] md:mt-[-50px] pb-16">
+                      No data!
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </main>
