@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ethers } from "ethers";
 import connectContract from "../utils/connectContract";
 import { toast } from "react-toastify";
+import { BASE_URL, getUniqueId } from "../utils/global";
 
 const BuyToken = () => {
   const [showBuying, setShowBuying] = useState(false);
@@ -22,56 +23,48 @@ const BuyToken = () => {
     setBuying(e);
     setShowBuying(!showBuying);
   };
-  const createEvent = async (cid) => {
-    try {
-      const chemContract = connectContract();
 
-      if (chemContract) {
-        let eventDataCID = cid;
+  const createEvent = async () => {
+    if (getUniqueId) {
+      try {
+        const chemContract = connectContract();
 
-        const txn = await chemContract.buyCredit(eventDataCID, transferAmount, {
-          gasLimit: 900000,
-        });
-        console.log("Minting...", txn.hash);
-        console.log("Minted -- ", txn.hash);
-        toast.success("Token Purchased");
-      } else {
-        console.log("Error getting contract.");
-        toast.error("Error getting contract.");
+        if (chemContract) {
+          let eventDataCID = getUniqueId();
+
+          const txn = await chemContract.buyCredit(
+            eventDataCID,
+            transferAmount,
+            {
+              gasLimit: 900000,
+            }
+          );
+          console.log("Minting...", txn.hash);
+          console.log("Minted -- ", txn.hash);
+          toast.success("Token Purchased");
+          setIsLoading(false);
+        } else {
+          console.log("Error getting contract.");
+          toast.error("Error getting contract.");
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.log(error, "err");
+        toast.success("Token Purchase failed");
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.log(error, "err");
-      toast.success("Token Purchase failed");
+    } else {
+      toast.error("Can't get your uniqueId, make sure you have subscribed");
     }
   };
   async function handleSubmit(e) {
     e.preventDefault();
-
+    setIsLoading(true);
     const body = {
       amnt: transferAmount,
     };
 
-    try {
-      const response = await fetch("/api/store-event-data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      if (response.status !== 200) {
-        alert("Oops! Something went wrong. Please refresh and try again.");
-      } else {
-        console.log("Form successfully submitted!");
-        let responseJSON = await response.json();
-        await createEvent(responseJSON.cid);
-      }
-      // check response, if success is false, dont take them to success page
-    } catch (error) {
-      alert(
-        `Oops! Something went wrong. Please refresh and try again. Error ${error}`
-      );
-    }
-
-    setShowBuying(!showBuying);
+    await createEvent();
   }
 
   return (
@@ -98,7 +91,7 @@ const BuyToken = () => {
           <div className="mt-16 w-full flex justify-center">
             <div className="flex flex-col items-center w-full md:w-1/2">
               <div className="flex flex-col justify-center mb-7">
-                <p>buy carbon credit</p>
+                <p>buy Token</p>
                 <h1 className="text-4xl md:text-6xl font-bold">
                   How would you like to buy
                 </h1>
@@ -116,12 +109,9 @@ const BuyToken = () => {
                     placeholder="Enter amount"
                     className="bg-green-100 pl-36 w-full border-2 border-green-300 cursor-pointer rounded-lg px-8 py-6 flex  justify-center items-center"
                   />
-                  <div
-                    className="absolute top-3 left-10 flex  items-center cursor-pointer"
-                    onClick={toggleBuying}
-                  >
-                    <p className="font-bold">{buying}</p>
-                    <RiIcons.RiArrowDropDownLine className="text-6xl" />
+                  <div className="absolute top-7 left-10 flex  items-center cursor-pointer">
+                    <p className="font-bold">CMX</p>
+                    {/* <RiIcons.RiArrowDropDownLine className="text-6xl" /> */}
                   </div>
 
                   {showBuying && (
@@ -148,9 +138,9 @@ const BuyToken = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className=" text-white bg-green-800 flex justify-center w-4/6 h-16 mt-10 rounded-md cursor-pointer px-12 flex items-center"
+                  className=" text-white bg-green-800 flex justify-center w-4/6 h-16 mt-10 rounded-md cursor-pointer px-12  items-center"
                 >
-                  {isLoading ? "Purchasing" : "Proceed with purchase"}
+                  {isLoading ? "Purchasing..." : "Proceed with purchase"}
                 </button>
               </form>
             </div>
