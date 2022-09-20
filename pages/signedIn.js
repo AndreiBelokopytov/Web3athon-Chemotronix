@@ -305,7 +305,8 @@ function SignedIn() {
                   <div className="flex"></div>
                   <div className="flex my-5 flex-wrap">
                     <p className=" text-green-800 mr-3 ">Wallet Address :</p>
-                    <p className=" text-green-800 font-bold"> {account}</p>
+                    <p className=" text-green-800 font-bold w-[156px] md:w-auto overflow-hidden"> {account} </p>
+                    <span className="md:hidden">...</span>
                   </div>
                 </div>
                 <div className="lg:w-1/2 lg:flex lg:justify-end items-center">
@@ -348,26 +349,29 @@ function SignedIn() {
             </div>
 
             <div className="mt-10">
-              <div className="bg-green-200 mt-4 h-32 rounded-xl flex justify-around items-center">
+              <div className="bg-green-200 mt-4 h-32 mb-32 md:mb-0 rounded-xl flex flex-col md:flex-row pl-7  justify-around md:items-center">
                 <p className=" text-green-800">Registration Time</p>
                 <p className=" text-green-800">Subscription Status</p>
                 <p className=" text-green-800">Unique ID</p>
               </div>
               {dataGraph !== null && (
-                <div className="mt-10 ml-7">
-                  <div className="bg-white mt-4 h-32 rounded-xl flex justify-around items-center">
-                    <p className=" text-green-800">
+                <div className="mt-10 md:ml-7">
+                  <div className="bg-white mt-4 h-32 rounded-xl flex flex-col md:flex-row  justify-around md:items-center">
+
+                    <p className=" text-green-800 mb-7 mg:mb-0 ">
                       <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
                         {convertToDate(dataGraph[0]?.registrationTime)}
                       </div>
                     </p>
-                    <p className=" text-green-800">
+
+                    <p className=" text-green-800 mb-7 mg:mb-0">
                       <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
                         {dataGraph[0]?.subStatus}
                       </div>
                     </p>
-                    <p className=" text-green-800">
-                      <div className="p-4 shadow  flex text-sm items-center justify-center rounded max-w-[200px] min-h-[60px] bg-yellow-500 text-white break-all">
+
+                    <p className=" text-green-800 mb-7 mg:mb-0">
+                      <div className="p-4 shadow  flex text-sm items-center justify-center rounded md:max-w-[200px] min-h-[60px] bg-yellow-500 text-white break-all">
                         <span className=" ">
                           {dataGraph[dataGraph.length - 1]?.uniqueID}
                         </span>

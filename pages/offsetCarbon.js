@@ -30,31 +30,32 @@ const OffsetCarbon = () => {
 
   const Offset = async () => {
     setIsLoading(true);
-    try {
-      const chemContract = connectContract();
-
-      if (chemContract) {
-        let uid = getUniqueId();
-        // let eventDataCID = cid;
-
-        const txn = await chemContract.offset( uid, amount);
-        console.log("Minting...", txn.hash);
-        console.log("Minted -- ", txn);
-        setIsLoading(false);
-        clear();
-        toast.success("Token sent");
-      } else {
-        console.log("Error getting contract.");
-        setIsLoading(false);
+    if (getUniqueId) {
+      try {
+        const chemContract = connectContract();
+  
+        if (chemContract) {
+          let uid = getUniqueId();
+          // let eventDataCID = cid;
+  
+          const txn = await chemContract.offset(amount, uid);
+          console.log("Minting...", txn.hash);
+          console.log("Minted -- ", txn);
+          setIsLoading(false);
+          clear();
+          toast.success("Token sent");
+        } else {
+          console.log("Error getting contract.");
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.log(error, "err");
       }
-    } catch (error) {
-      console.log(error, "err");
     }
+    
   };
 
-  const body = {
-    amount: amount,
-  };
+  
 
 
   return (
