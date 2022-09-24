@@ -314,7 +314,7 @@ function SignedIn() {
                   </div>
                 </div>
                 <div className="lg:w-1/2 lg:flex lg:justify-end items-center">
-                  {account && dataGraph[0]?.subStatus == "active" && (
+                  {dataGraph && account && dataGraph[0]?.subStatus == "active" && (
                     <div className=" relative w-auto">
                       <div
                         className="bg-slate-50 border-4 cursor-pointer border-green-200 rounded-lg px-8 py-2 flex  justify-center items-center"
