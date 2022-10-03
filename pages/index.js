@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import ContactSection from "../components/ContactSection";
 import Hero from "../components/Hero";
+import MicrosoftSection from "../components/MicrosoftSection";
 import Navbar from "../components/Navbar";
 import QuoteSection from "../components/QuoteSection";
 import TeamSection from "../components/TeamSection";
@@ -27,6 +28,7 @@ export default function Home() {
           <QuoteSection />
           <ThirdSection />
           <TeamSection />
+          <MicrosoftSection/>
           <ContactSection />
         </DefaultLayout>
       </main>
