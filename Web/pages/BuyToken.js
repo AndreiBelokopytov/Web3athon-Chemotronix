@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import style from '../styles/signedIn.module.css';
 import * as RiIcons from 'react-icons/ri';
 import { useState } from "react";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 import Link from "next/link";
 
 

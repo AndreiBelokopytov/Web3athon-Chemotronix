@@ -3,9 +3,9 @@ import Navbar from "../components/Navbar";
 import style from '../styles/signedIn.module.css';
 import * as RiIcons from 'react-icons/ri';
 import { useState } from "react";
-import Image from "next/image"; 
+import Image from "next/image";
 import empty from "../images/empty.svg"
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 import Link from "next/link";
 
 
@@ -92,21 +92,21 @@ export default function SignedIn() {
                     </div>
                 </div>
             </div>
-            
+
             <div className="mt-10">
-              <p className=" text-green-800">Credit Usage:</p>  
+              <p className=" text-green-800">Credit Usage:</p>
               <div className="bg-green-200 mt-4 h-32 rounded-xl flex justify-around items-center">
                 <p className=" text-green-800">Amount used</p>
                 <p className=" text-green-800">Time</p>
                 <p className=" text-green-800">Balance</p>
               </div>
-              
+
               <div className="mt-20">
                {
                   !showUsage && (
                   <div className=" h-auto border-dashed rounded-lg border-2 px-3 border-slate-300">
                     <div  className=" flex  flex-col w-100 items-center justify-around ">
-                      <Image src={empty} height={450} width={450}/>   
+                      <Image src={empty} height={450} width={450}/>
                       <p className=" font-extrabold text-slate-500 mt-[-30px] md:mt-[-50px] pb-16">No data!</p>
                     </div>
                   </div>
@@ -116,14 +116,14 @@ export default function SignedIn() {
             </div>
         </div>
       </main>
-      
+
       <div className="flex flex-col items-center relative">
         <div className="container">
           <Footer></Footer>
         </div>
         <div className="bg-[#E9F4FB] h-24 w-full bottom-0 absolute z-[-1]"></div>
       </div>
-        
+
     </div>
   );
 }
