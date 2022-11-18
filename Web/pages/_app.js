@@ -10,7 +10,7 @@ import {
 import "@rainbow-me/rainbowkit/styles.css";
 
 const { chains, provider } = configureChains(
-  [chain.goerli, chain.polygon],
+  [chain.goerli, chain.polygonMumbai],
   [alchemyProvider({ alchemyId: process.env.ALCHEMY_ID })]
 );
 
