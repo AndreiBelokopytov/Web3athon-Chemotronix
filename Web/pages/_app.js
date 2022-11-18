@@ -11,14 +11,14 @@ import { getDefaultWallets, RainbowKitProvider, lightTheme } from "@rainbow-me/r
 import '@rainbow-me/rainbowkit/styles.css';
 
 const { chains, provider} = configureChains(
-  [chain.mainnet, chain.polygon],  
+  [chain.goerli, chain.polygon],
   [alchemyProvider({alchemyId: process.env.ALCHEMY_ID})]
 )
 
 const { connectors } = getDefaultWallets({
   appName: "chemotronix",
   chains,
-}); 
+});
 
 
 const wagmiClient = createClient({
@@ -30,7 +30,7 @@ const wagmiClient = createClient({
 function MyApp({ Component, pageProps }) {
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider 
+      <RainbowKitProvider
       chains={chains}
       theme={lightTheme({
         accentColor: '#008036',
