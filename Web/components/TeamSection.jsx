@@ -11,10 +11,10 @@ function TeamSection() {
     </AnimatePresence>
   );
   const teamMemberDetails = [
-    <motion.span exit={{ opacity: 0 }}>
+    <motion.span key={0} exit={{ opacity: 0 }}>
       Scroll over your cursor on later to see the magic!
     </motion.span>,
-    <span>
+    <span key={1}>
       <span className="text-3xl font-[400]">Peace Bello,</span>
       <br />
       <span className="text-lg font-[400]">

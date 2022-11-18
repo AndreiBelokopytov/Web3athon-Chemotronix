@@ -7,7 +7,7 @@ import Footer from "../components/footer";
 import Link from "next/link";
 
 
-const buyToken = () => {
+const BuyToken = () => {
   const [showBuying, setShowBuying] = useState(false)
   const [buying, setBuying] = useState('Co2E')
 
@@ -17,7 +17,7 @@ const buyToken = () => {
   const changeBuying= (e) => {
     setBuying(e);
     setShowBuying(!showBuying)
-  
+
   }
 
   return (
@@ -41,7 +41,7 @@ const buyToken = () => {
           </Link>
           </div>
 
-          
+
           <div className="mt-16 w-full flex justify-center">
             <div className="flex flex-col items-center w-full md:w-1/2">
               <div className="flex flex-col justify-center mb-7">
@@ -61,16 +61,16 @@ const buyToken = () => {
                         <div className="bg-slate-50 w-full border-2 cursor-pointer py-6 border-slate-50 border-t-green-800">
                           <ul className="flex flex-col w-full justify-center items-center">
                             <li className=" py-3 hover:bg-slate-300 w-full text-center" onClick={()=>changeBuying('Co2E')}>
-                              <p>Co2E</p> 
+                              <p>Co2E</p>
                             </li>
                             <li className=" py-3 hover:bg-slate-300 w-full text-center" onClick={()=>changeBuying('USDT')}>
                               <p>USDT</p>
                             </li>
                           </ul>
                         </div>
-                    </div>                          
+                    </div>
                   )
-                  
+
                 }
               </div>
               <div className="bg-green-800 h-16 mt-10 rounded-md cursor-pointer px-12 flex items-center">
@@ -80,16 +80,16 @@ const buyToken = () => {
           </div>
         </div>
       </main>
-      
+
       <div className="flex flex-col items-center relative">
         <div className="container">
           <Footer></Footer>
         </div>
         <div className="bg-[#E9F4FB] h-24 w-full bottom-0 absolute z-[-1]"></div>
       </div>
-        
+
     </div>
   )
 }
 
-export default buyToken
+export default BuyToken
