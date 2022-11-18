@@ -42,6 +42,22 @@ p {
   background-image: url("../images/Vector\ \(5\).png");
   background-repeat: no-repeat;
 }
+@media (max-width: 800px) {
+  .cus-align {
+    align-items: center;
+  }
+}
+
+  
+.text{
+  display: inline;
+  width: 100%;
+}
+  
+.read-or-hide{
+  color: rgb(192,192,192);
+  cursor: pointer;
+}
 @layer components {
   .btn-primary {
     @apply bg-primary text-white rounded-md py-2 px-5 mt-5 hover:opacity-70 hover:bg-primary;

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 
-function Navbar() {
+function Navbar({signedIn}) {
   const router = useRouter();
   const [mobileNav, setMobileNav] = React.useState(false);
   return (
@@ -116,7 +116,7 @@ function Navbar() {
         </label>
       </div>
       <div
-        className={` absolute w-[100vw] px-5 bg-white py-10 z-50 transition-all duration-500 lg:hidden ${
+        className={` absolute  px-5 bg-white py-10 z-50 transition-all duration-500 ${signedIn ? "w-[88vw]": "w-[100vw]"} lg:hidden ${
           mobileNav ? "top-0" : "-top-[10000px]"
         } `}
       >

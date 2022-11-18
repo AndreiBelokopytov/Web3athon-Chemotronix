@@ -31,9 +31,9 @@ function usageChart() {
     "https://thingspeak.com/channels/1803223/widgets/520509",
   ];
   return (
-    <div className="py-3">
+    <div className="py-3 bg-cus">
       <h2 className="flex  justify-center text-[25px] mb-20">Usgae Charts</h2>
-      <div className="grid xl:grid-cols-3  px-5 bg-cus lg:grid-cols-2 grid-cols-1 gap-6 mx-auto">
+      <div className="md:grid hidden xl:grid-cols-3  px-5 bg-cus lg:grid-cols-2 grid-cols-1 gap-6 mx-auto">
         {visuals.map((chart,i) => {
           return (
             <div key={i} className="rounded-lg shadow-lg  w-fit">
@@ -42,6 +42,21 @@ function usageChart() {
                 frameBorder="1"
                 height={"400px"}
                 width={"500px"}
+                className="rounded"
+              ></iframe>
+            </div>
+          );
+        })}
+        </div>
+      <div className="grid md:hidden xl:grid-cols-3  px-5  lg:grid-cols-2 grid-cols-1 gap-6 w-[86%] mx-auto">
+        {visuals.map((chart,i) => {
+          return (
+            <div key={i} className="rounded-lg shadow-lg  w-fit">
+              <iframe
+                src={chart}
+                frameBorder="1"
+                height={"400px"}
+                width={"100%"}
                 className="rounded"
               ></iframe>
             </div>

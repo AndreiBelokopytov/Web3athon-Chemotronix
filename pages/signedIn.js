@@ -10,14 +10,22 @@ import Link from "next/link";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount, useDisconnect } from "wagmi";
 import Wmenu from "../components/Wmenu";
+// import ReadMore from "../components/ReadMore";
 import { ethers } from "ethers";
 import axios from "axios";
-import { BASE_URL, Subscribed, SubscriptionCheck } from "../utils/global";
+import {
+  BASE_URL,
+  storeUniqueId,
+  Subscribed,
+  SubscriptionCheck,
+} from "../utils/global";
 import { useRouter } from "next/router";
 import connectContract from "../utils/connectContract";
 import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
 import ColoredCard from "../components/ColoredCard";
-// import client from "../apollo-client";
+import moment from "moment";
+import { toast } from "react-toastify";
+import { ReadMore } from "./../components/ReadMore";
 
 function SignedIn() {
   useEffect(() => {
@@ -42,15 +50,22 @@ function SignedIn() {
   const [deposit, setDeposit] = useState();
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [dataGraph, setDataGraph] = useState(null);
+  const [filtered, setFiltered] = useState(null);
   const [graphAddress, setGraphAddress] = useState(account);
+
   const openSubcribe = () => {
     setSub(!sub);
+  };
+  const convertToDate = (num) => {
+    let newUnix = moment.unix(num);
+    console.log(newUnix.format("llll"));
+    return newUnix.format("llll");
   };
   const client = new ApolloClient({
     uri: "https://api.thegraph.com/subgraphs/name/dear-ore/chemotronix",
     cache: new InMemoryCache(),
   });
-  console.log(account);
+
   useEffect(() => {
     client
       .query({
@@ -66,24 +81,33 @@ function SignedIn() {
         `,
       })
       .then((res) => {
-        console.log(res);
-        setDataGraph(res.data.registers);
+        function check(obb) {
+          return obb.id == account.toLowerCase();
+        }
+        const data = res.data.registers;
+        setDataGraph(data.filter(check));
+        console.log(data.filter(check), account);
       })
       .catch((err) => {
         console.log(err, "err");
       });
   }, [account]);
 
-  const createEvent = async (cid) => {
+  const createEvent = async (uniqueID) => {
     try {
-      const rsvpContract = connectContract();
+      const chemContract = connectContract();
 
-      if (rsvpContract) {
-        let eventDataCID = cid;
+      if (chemContract) {
+        let eventDataCID = uniqueID;
 
-        const txn = await rsvpContract.subscribe(deposit, eventDataCID);
+        const txn = await chemContract.subscribe(deposit, eventDataCID, {
+          gasLimit: 900000,
+        });
+
         console.log("Minting...", txn.hash);
         console.log("Minted -- ", txn.hash);
+        storeUniqueId(uniqueID);
+        toast.success("Subscribed");
         Subscribed();
         setIsSubscribed(true);
       } else {
@@ -101,25 +125,7 @@ function SignedIn() {
       deposit: deposit,
     };
 
-    try {
-      const response = await fetch("/api/store-event-data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      if (response.status !== 200) {
-        alert("Oops! Something went wrong. Please refresh and try again.");
-      } else {
-        console.log("Form successfully submitted!");
-        let responseJSON = await response.json();
-        await createEvent(responseJSON.cid);
-      }
-      // check response, if success is false, dont take them to success page
-    } catch (error) {
-      alert(
-        `Oops! Something went wrong. Please refresh and try again. Error ${error}`
-      );
-    }
+    await createEvent(body.iot);
   }
 
   const toggleBuyCarbon = () => {
@@ -158,29 +164,6 @@ function SignedIn() {
       });
   };
 
-  // useEffect(() => {
-  //   if (cidArray) {
-  //     getUsers();
-  //   }
-  // }, [cidArray]);
-
-  // function getUsers() {
-  //   cidArray.map((e) => {
-  //     return axios
-  //       .get(`https://api.web3.storage/user/uploads/${e}`, config)
-  //       .then((response) => {
-  //         console.log(response, "res");
-  //         newArr.push(response.data.name);
-  //         setUsers([...users, ...newArr]);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   });
-  // }
-  // useEffect(() => {
-  //   console.log(users);
-  // }, [users]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -197,9 +180,9 @@ function SignedIn() {
         </Head>
 
         <div className={style.bg}></div>
-        <main className="flex justify-center ">
+        <main className="flex justify-center overflow-hiddne">
           <div className="container px-5">
-            <Navbar />
+            <Navbar signedIn />
 
             <div className="mt-24">
               {sub && (
@@ -304,7 +287,7 @@ function SignedIn() {
                     <h1 className="text-4xl md:text-6xl font-bold"></h1>
                   </div>
                 </div>
-                <div className="hidden lg:w-1/2 lg:flex lg:justify-end items-center">
+                <div className="lg:mt-0 mt-10 w-[40%] lg:w-1/2 lg:flex lg:justify-end items-center">
                   <div className="bg-green-800 h-16 rounded-md cursor-pointer px-12 flex items-center">
                     <p
                       onClick={() => router.push("/usageChart")}
@@ -323,11 +306,15 @@ function SignedIn() {
                   <div className="flex"></div>
                   <div className="flex my-5 flex-wrap">
                     <p className=" text-green-800 mr-3 ">Wallet Address :</p>
-                    <p className=" text-green-800 font-bold"> {account}</p>
+                    <p className=" text-green-800 font-bold w-[156px] md:w-auto overflow-hidden">
+                      {" "}
+                      {account}{" "}
+                    </p>
+                    <span className="md:hidden">...</span>
                   </div>
                 </div>
                 <div className="lg:w-1/2 lg:flex lg:justify-end items-center">
-                  {account && (
+                  {dataGraph && account && dataGraph[0]?.subStatus == "active" && (
                     <div className=" relative w-auto">
                       <div
                         className="bg-slate-50 border-4 cursor-pointer border-green-200 rounded-lg px-8 py-2 flex  justify-center items-center"
@@ -350,6 +337,11 @@ function SignedIn() {
                                   Buy carbon credit
                                 </li>
                               </Link>
+                              <Link href={"/offsetCarbon"}>
+                                <li className=" py-3 hover:bg-slate-300 w-full text-center">
+                                  Offset carbon
+                                </li>
+                              </Link>
                             </ul>
                           </div>
                         </div>
@@ -360,29 +352,39 @@ function SignedIn() {
               </div>
             </div>
 
-            <div className="mt-10">
-              <div className="bg-green-200 mt-4 h-32 rounded-xl flex justify-around items-center">
-                <p className=" text-green-800">Registration Time</p>
-                <p className=" text-green-800">Subscription Status</p>
-                <p className=" text-green-800">Unique ID</p>
+            <div className="mt-10 md:flex flex-col hidden  justify-between">
+              <div className="bg-green-200 mt-4 h-fit md:h-32 mb-32 md:mb-0 rounded-xl flex flex-col md:flex-row pl-7  justify-around md:items-center">
+                <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px]">
+                  Registration Time
+                </p>
+                <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px]">
+                  Subscription Status
+                </p>
+                <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px]">
+                  Unique ID
+                </p>
               </div>
-              {dataGraph && (
-                <div className="mt-10 ml-7">
-                  <div className="bg-white mt-4 h-32 rounded-xl flex justify-around items-center">
-                    <p className=" text-green-800">
-                      <ColoredCard
-                        text={dataGraph[dataGraph.length - 1].registrationTime}
-                      />
+              {dataGraph !== null && (
+                <div className="mt-10 md:ml-7 ml-2">
+                  <div className="bg-white mt-4 h-32 rounded-xl flex flex-col md:flex-row  justify-around md:items-center">
+                    <p className=" text-green-800 mb-7 md:mb-0 ">
+                      <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
+                        {convertToDate(dataGraph[0]?.registrationTime)}
+                      </div>
                     </p>
-                    <p className=" text-green-800">
-                      <ColoredCard
-                        text={dataGraph[dataGraph.length - 1]?.subStatus}
-                      />
+
+                    <p className=" text-green-800 mb-7 md:mb-0">
+                      <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
+                        {dataGraph[0]?.subStatus}
+                      </div>
                     </p>
-                    <p className=" text-green-800">
-                      <ColoredCard
-                        text={dataGraph[dataGraph.length - 1].uniqueID}
-                      />
+
+                    <p className=" text-green-800 mb-7 md:mb-0">
+                      <div className="p-4 shadow  flex text-sm items-center justify-center rounded md:max-w-[200px] min-h-[60px] bg-yellow-500 text-white break-all">
+                        <span className=" ">
+                          {dataGraph[dataGraph.length - 1]?.uniqueID}
+                        </span>
+                      </div>
                     </p>
                   </div>
                 </div>
@@ -400,6 +402,52 @@ function SignedIn() {
                   </div>
                 )}
               </div>
+            </div>
+            {dataGraph !== null && (
+              <>
+                <div className="grid md:hidden grid-cols-4 gap-3 mt-10 bg-white p-2 rounded">
+                  <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px] col-span-2">
+                    Registration Time
+                  </p>
+                  <p className=" text-green-800 mb-7 md:mb-0  col-span-2">
+                    <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
+                      {convertToDate(dataGraph[0]?.registrationTime)}
+                    </div>
+                  </p>
+                  <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px] col-span-2">
+                    Subscription Status
+                  </p>
+                  <p className=" text-green-800 mb-7 md:mb-0 col-span-2">
+                    <div className="p-4 shadow  flex text-sm items-center justify-center rounded  min-h-[60px] bg-yellow-500 text-white ">
+                      {dataGraph[0]?.subStatus}
+                    </div>
+                  </p>
+                  <p className=" text-green-800 mb-7 md:mb-0 min-h-[60px] col-span-2">
+                    Unique ID
+                  </p>
+                  <p className=" text-green-800 mb-7 md:mb-0 col-span-2">
+                    <div className="p-4 shadow  flex text-sm items-center justify-center rounded md:max-w-[200px] min-h-[60px] bg-yellow-500 text-white break-all">
+                      <span className=" ">
+                        <ReadMore>
+                          {dataGraph[dataGraph.length - 1]?.uniqueID}
+                        </ReadMore>
+                      </span>
+                    </div>
+                  </p>
+                </div>
+              </>
+            )}
+            <div className="mt-20">
+              {dataGraph == null && (
+                <div className=" h-auto border-dashed rounded-lg border-2 px-3 border-slate-300">
+                  <div className=" flex  flex-col w-100 items-center justify-around ">
+                    <Image src={empty} height={450} width={450} />
+                    <p className=" font-extrabold text-slate-500 mt-[-30px] md:mt-[-50px] pb-16">
+                      No data!
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </main>
