@@ -2,7 +2,7 @@ import Head from "next/head";
 import Navbar from "../components/Navbar";
 import style from "../styles/signedIn.module.css";
 import * as RiIcons from "react-icons/ri";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import empty from "../images/empty.svg";
 import Footer from "../components/Footer";
@@ -17,24 +17,31 @@ import { useRouter } from "next/router";
 import connectContract from "../utils/connectContract";
 import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
 import ColoredCard from "../components/ColoredCard";
-// import client from "../apollo-client";
+
+const client = new ApolloClient({
+  uri: "https://api.thegraph.com/subgraphs/name/dear-ore/chemotronix",
+  cache: new InMemoryCache(),
+});
+
+const config = {
+  headers: {
+    Authorization:
+      "Bearer " +
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweENBOTRiNERGRkYxZDMzMjYxOUVhZjMxRTBjRTlDNzNCYjI4QzJERTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjIyMTgxMDg5ODksIm5hbWUiOiJUZXN0IDAyIn0.hEHqeerV5xEWU9OLXhZPXup1EaATXJlLVDzAX4fz0CU",
+  },
+};
 
 function SignedIn() {
   useEffect(() => {
     if (SubscriptionCheck() == true) {
       setIsSubscribed(true);
     }
-  }, [SubscriptionCheck]);
-
-  // console.log(data);
+  }, []);
 
   const account = useAccount().address;
   const { disconnect } = useDisconnect();
-  // console.log(useAccount())
-
   const [buyCarbon, setBuyCarbon] = useState(false);
   const [showUsage, setShowUsage] = useState(false);
-  // const [cidArray, setCidArray] = useState(null);
   const [devices, setDevices] = useState(null);
   const router = useRouter();
   const [sub, setSub] = useState(false);
@@ -46,11 +53,7 @@ function SignedIn() {
   const openSubcribe = () => {
     setSub(!sub);
   };
-  const client = new ApolloClient({
-    uri: "https://api.thegraph.com/subgraphs/name/dear-ore/chemotronix",
-    cache: new InMemoryCache(),
-  });
-  console.log(account);
+
   useEffect(() => {
     client
       .query({
@@ -66,7 +69,6 @@ function SignedIn() {
         `,
       })
       .then((res) => {
-        console.log(res);
         setDataGraph(res.data.registers);
       })
       .catch((err) => {
@@ -125,17 +127,11 @@ function SignedIn() {
   const toggleBuyCarbon = () => {
     setBuyCarbon(!buyCarbon);
   };
-  let config = {
-    headers: {
-      Authorization:
-        "Bearer " +
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweENBOTRiNERGRkYxZDMzMjYxOUVhZjMxRTBjRTlDNzNCYjI4QzJERTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjIyMTgxMDg5ODksIm5hbWUiOiJUZXN0IDAyIn0.hEHqeerV5xEWU9OLXhZPXup1EaATXJlLVDzAX4fz0CU",
-    },
-  };
+
   useEffect(() => {
     carbonData();
-  }, []);
-  const carbonData = () => {
+  }, [carbonData]);
+  const carbonData = useCallback(() => {
     axios
       .get(
         `${BASE_URL}/user/uploads?before=2020-07-27T17%3A32%3A28Z&page=1&size=10`,
@@ -156,7 +152,7 @@ function SignedIn() {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }, []);
 
   // useEffect(() => {
   //   if (cidArray) {
@@ -392,7 +388,12 @@ function SignedIn() {
                 {dataGraph == null && (
                   <div className=" h-auto border-dashed rounded-lg border-2 px-3 border-slate-300">
                     <div className=" flex  flex-col w-100 items-center justify-around ">
-                      <Image src={empty} height={450} width={450} />
+                      <Image
+                        src={empty}
+                        height={450}
+                        width={450}
+                        alt={"empty data"}
+                      />
                       <p className=" font-extrabold text-slate-500 mt-[-30px] md:mt-[-50px] pb-16">
                         No data!
                       </p>
@@ -416,54 +417,3 @@ function SignedIn() {
 }
 
 export default SignedIn;
-
-// export async function getStaticProps() {
-//   // const client = new ApolloClient({
-//   //   uri: 'https://www.graphqlbin.com/v2/new',
-//   //   cache: new InMemoryCache()
-//   // })
-
-//   // const {data} = await client.query({
-//   //   query: gql `
-//   //     query GetLaunches {
-//   //       launchesPast(limit: 10) {
-//   //         mission_name
-//   //         launch_date_local
-//   //         launch_site {
-//   //           site_name_long
-//   //         }
-//   //         links {
-//   //           article_link
-//   //           video_link
-//   //         }
-//   //         rocket {
-//   //           rocket_name
-//   //         }
-//   //       }
-//   //     }
-//   //   `
-//   // })
-
-//   // const client = new ApolloClient({
-//   //   uri: "https://api.thegraph.com/subgraphs/name/dear-ore/chemotronix",
-//   //   cache: new InMemoryCache(),
-//   // });
-
-//   // const { data } = await client.query({
-//   //   query: gql`
-//   //      query registers[] {
-//   //       id
-//   //       subStatus
-//   //       uniqueID
-//   //     }
-//   //   `,
-//   // });
-
-//   // console.log(data)
-
-//   // return {
-//   //   props: {
-//   //     data: data,
-//   //   },
-//   // };
-// }
