@@ -2,21 +2,30 @@ import Head from "next/head";
 import Navbar from "../components/Navbar";
 import style from "../styles/signedIn.module.css";
 import * as RiIcons from "react-icons/ri";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import Image from "next/image";
 import empty from "../images/empty.svg";
 import Footer from "../components/Footer";
 import Link from "next/link";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount, useDisconnect } from "wagmi";
+import { useAccount, useDisconnect, useSigner } from "wagmi";
 import Wmenu from "../components/Wmenu";
-import { ethers } from "ethers";
+import { ethers, Contract } from "ethers";
 import axios from "axios";
 import { BASE_URL, Subscribed, SubscriptionCheck } from "../utils/global";
 import { useRouter } from "next/router";
 import connectContract from "../utils/connectContract";
 import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
 import ColoredCard from "../components/ColoredCard";
+import { chemotronixContract } from "../contracts/chemotronix";
+
+const industryTypes = [
+  ["Energy", 0],
+  ["Agriculture", 1],
+  ["Land Use Change", 2],
+  ["Industrial Processes", 3],
+  ["Waste", 4],
+];
 
 const client = new ApolloClient({
   uri: "https://api.thegraph.com/subgraphs/name/dear-ore/chemotronix",
@@ -32,6 +41,17 @@ const config = {
 };
 
 function SignedIn() {
+  const { data: signer } = useSigner();
+
+  const contract = useMemo(
+    () =>
+      new Contract(
+        chemotronixContract.address,
+        chemotronixContract.abi,
+        signer
+      ),
+    [signer]
+  );
   useEffect(() => {
     if (SubscriptionCheck() == true) {
       setIsSubscribed(true);
@@ -50,6 +70,10 @@ function SignedIn() {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [dataGraph, setDataGraph] = useState(null);
   const [graphAddress, setGraphAddress] = useState(account);
+  const [selectedIndustryType, selectIndustryType] = useState(
+    industryTypes[0][1]
+  );
+
   const openSubcribe = () => {
     setSub(!sub);
   };
@@ -104,23 +128,16 @@ function SignedIn() {
     };
 
     try {
-      const response = await fetch("/api/store-event-data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      if (response.status !== 200) {
-        alert("Oops! Something went wrong. Please refresh and try again.");
-      } else {
-        console.log("Form successfully submitted!");
-        let responseJSON = await response.json();
-        await createEvent(responseJSON.cid);
-      }
-      // check response, if success is false, dont take them to success page
-    } catch (error) {
-      alert(
-        `Oops! Something went wrong. Please refresh and try again. Error ${error}`
+      await contract.register(
+        ethers.utils.formatBytes32String(iot),
+        selectedIndustryType,
+        {
+          value: ethers.utils.parseEther("1.0"),
+        }
       );
+      setSub(false);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -128,9 +145,6 @@ function SignedIn() {
     setBuyCarbon(!buyCarbon);
   };
 
-  useEffect(() => {
-    carbonData();
-  }, [carbonData]);
   const carbonData = useCallback(() => {
     axios
       .get(
@@ -153,6 +167,17 @@ function SignedIn() {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    carbonData();
+  }, [carbonData]);
+
+  const handleChangeIndustryType = useCallback((evt) => {
+    selectIndustryType(evt.target.value);
+  }, []);
+
+  const isSubscribeFormValid =
+    iot !== undefined && typeof iot === "string" && iot.trim() !== "";
 
   // useEffect(() => {
   //   if (cidArray) {
@@ -246,18 +271,24 @@ function SignedIn() {
                             />
                           </div>
                           <div>
-                            <input
-                              type="number"
-                              name="deposit"
-                              id="deposit"
-                              onChange={(e) => setDeposit(e.target.value)}
-                              placeholder="Enter deposit"
-                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                              required
-                            />
+                            <select
+                              className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                              onChange={handleChangeIndustryType}
+                            >
+                              {industryTypes.map(([name, id]) => (
+                                <option
+                                  key={id}
+                                  value={id}
+                                  selected={id === selectIndustryType}
+                                >
+                                  {name}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                           <button
                             type="submit"
+                            disabled={!isSubscribeFormValid}
                             className="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                           >
                             Subscribe
